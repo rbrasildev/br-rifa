@@ -1,22 +1,47 @@
 import './css/admin.css'
+import Image from 'next/image';
+import { FaCog } from 'react-icons/fa';
+import { MdShoppingCart, MdAutoGraph, MdSettingsSystemDaydream, MdSettings, MdBook, MdMenuBook, MdPhoneCallback, MdLogout, MdLooks, MdLabel, MdLabelOutline, MdNewLabel, MdStickyNote2, MdAirplaneTicket } from "react-icons/md"
+import { LuTicket } from "react-icons/lu";
+import { ReactNode } from 'react';
 
-export default function Dashboard() {
+interface DashboardProps {
+    children: ReactNode
+}
+
+export default function Dashboard({ children }: DashboardProps) {
     return (
         <div className="wrap">
-            <header></header>
-            <aside className="sidebar w-[200px] bg-amber-400 fixed left-0 top-0 bottom-0">
-                <ul>
-                    <li><a href="">Capanhas</a></li>
-                    <li><a href="">Ranking</a></li>
-                    <li><a href="">Configurações</a></li>
-                    <li><a href="">Tutoriais</a></li>
-                    <li><a href="">Suporte</a></li>
-                    <li><a href="">Sair</a></li>
+            <header className='ml-[280px] bg-white flex flex-col justify-end border-b-2 border-zinc-600'>
+                <Image
+                    src="/assets/logo.png"
+                    width={200}
+                    height={100}
+                    alt="BR Rifas"
+                />
+            </header>
+            <aside className="sidebar w-[280px] fixed text-slate-600 left-0 top-0 bottom-0 border-r-2 bg-slate-50 border-zinc-300 p-3">
+                <Image
+                    className='my-10'
+                    src="/assets/logo.png"
+                    width={330}
+                    height={110}
+                    alt="BR Rifas"
+                />
+                <ul className='flex flex-col gap-3'>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><LuTicket />Campanhas</a></li>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><MdAutoGraph /> Ranking</a></li>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><MdShoppingCart />Histórico de colaborações</a></li>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><MdSettings />Configurações</a></li>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><MdMenuBook />Tutoriais</a></li>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><MdPhoneCallback />Suporte</a></li>
+                    <li><a href="" className='flex gap-2 items-center hover:text-lime-700 translate-x-2'><MdLogout />Sair</a></li>
                 </ul>
             </aside>
+            não estou te
 
-            <main className="content">
-
+            <main className="ml-[280px] p-3">
+                {children}
             </main>
 
         </div>
