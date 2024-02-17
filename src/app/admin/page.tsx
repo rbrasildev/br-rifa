@@ -9,13 +9,12 @@ import {
   MdLogout
 } from 'react-icons/md';
 import { LuTicket } from 'react-icons/lu';
-import { ReactNode } from 'react';
 
-interface DashboardProps {
-  children: ReactNode;
-}
-
-export default function Dashboard({ children }: DashboardProps) {
+export default function Dashboard({
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <div className="wrap">
       <header className="ml-[280px] bg-white flex flex-col justify-end border-b-2 border-zinc-600">
