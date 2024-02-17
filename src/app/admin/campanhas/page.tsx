@@ -1,9 +1,9 @@
-import Dashboard from '../layout';
+import DashboardLayout from '../../components/admin/layout';
 
 export default function Campanhas() {
   return (
-    <Dashboard>
+    <DashboardLayout>
       <h1 className="text-white">Campanhas</h1>
-    </Dashboard>
+    </DashboardLayout>
   );
 }
