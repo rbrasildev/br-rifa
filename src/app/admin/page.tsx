@@ -1,4 +1,3 @@
-'use client';
 import './css/admin.css';
 import Image from 'next/image';
 import {
@@ -10,12 +9,13 @@ import {
   MdLogout
 } from 'react-icons/md';
 import { LuTicket } from 'react-icons/lu';
+import { ReactNode } from 'react';
 
-export default function Dashboard({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+interface DashboardProps {
+  children: ReactNode;
+}
+
+export function Dashboard({ children }: DashboardProps) {
   return (
     <div className="wrap">
       <header className="ml-[280px] bg-white flex flex-col justify-end border-b-2 border-zinc-600">
