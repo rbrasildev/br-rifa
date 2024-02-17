@@ -15,7 +15,7 @@ interface DashboardProps {
   children: ReactNode;
 }
 
-export function Dashboard({ children }: DashboardProps) {
+export default function Dashboard({ children }: DashboardProps) {
   return (
     <div className="wrap">
       <header className="ml-[280px] bg-white flex flex-col justify-end border-b-2 border-zinc-600">

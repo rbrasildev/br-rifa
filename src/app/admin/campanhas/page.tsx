@@ -1,4 +1,4 @@
-import Dashboard from '../page';
+import Dashboard from '../layout';
 
 export default function Campanhas() {
   return (
