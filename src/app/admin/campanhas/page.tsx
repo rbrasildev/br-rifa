@@ -1,9 +1,9 @@
-import Dashboard from "../page";
+import Dashboard from '../page';
 
-export default function Campanhas(){
-return(
+export default function Campanhas() {
+  return (
     <Dashboard>
-        <h1 className="text-white">Campanhas</h1>
+      <h1 className="text-white">Campanhas</h1>
     </Dashboard>
-)
+  );
 }
