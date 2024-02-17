@@ -94,7 +94,6 @@ export default function Dashboard({ children }: DashboardProps) {
           </li>
         </ul>
       </aside>
-      não estou te
       <main className="ml-[280px] p-3">{children}</main>
     </div>
   );
