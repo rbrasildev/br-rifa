@@ -11,7 +11,7 @@ import {
 import { LuTicket } from 'react-icons/lu';
 import { ReactNode } from 'react';
 
-export interface DashboardProps {
+interface DashboardProps {
   children: ReactNode;
 }
 
