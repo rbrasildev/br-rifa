@@ -13,13 +13,13 @@ export default function Sidebar() {
                 alt="BR Rifas"
             />
             <ul className='flex flex-col gap-3'>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><LuTicket />Campanhas</a></li>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><MdAutoGraph /> Ranking</a></li>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><MdShoppingCart />Histórico de colaborações</a></li>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><MdSettings />Configurações</a></li>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><MdMenuBook />Tutoriais</a></li>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><MdPhoneCallback />Suporte</a></li>
-                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 translate-x-2'><MdLogout />Sair</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><LuTicket />Campanhas</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><MdAutoGraph /> Ranking</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><MdShoppingCart />Histórico de colaborações</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><MdSettings />Configurações</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><MdMenuBook />Tutoriais</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><MdPhoneCallback />Suporte</a></li>
+                <li><a href="" className='flex gap-2 items-center hover:text-lime-500 transition-all'><MdLogout />Sair</a></li>
             </ul>
         </aside>
     )
