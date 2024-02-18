@@ -1,14 +1,3 @@
-// import './css/admin.css';
-import Image from 'next/image';
-import {
-  MdShoppingCart,
-  MdAutoGraph,
-  MdSettings,
-  MdMenuBook,
-  MdPhoneCallback,
-  MdLogout
-} from 'react-icons/md';
-import { LuTicket } from 'react-icons/lu';
 import { ReactNode } from 'react';
 import Sidebar from './sidebar';
 import Header from './header';

@@ -1,6 +1,6 @@
 "use client"
 import './css/admin.css'
-import { LuAreaChart, LuBarChartHorizontal, LuEye, LuEyeOff, LuHistory, LuMoreVertical, LuPencil, LuTicket, LuTrophy } from 'react-icons/lu';
+import { LuAreaChart, LuEye, LuEyeOff, LuHistory, LuMoreVertical, LuPencil, LuTicket, LuTrophy } from 'react-icons/lu';
 import Image from 'next/image';
 import Sidebar from '../components/admin/sidebar';
 import Header from '../components/admin/header';

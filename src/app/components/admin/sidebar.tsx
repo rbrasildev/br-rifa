@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { MdShoppingCart, MdAutoGraph, MdSettingsSystemDaydream, MdSettings, MdBook, MdMenuBook, MdPhoneCallback, MdLogout, MdLooks, MdLabel, MdLabelOutline, MdNewLabel, MdStickyNote2, MdAirplaneTicket } from "react-icons/md"
+import { MdShoppingCart, MdAutoGraph, MdSettings, MdBook, MdMenuBook, MdPhoneCallback, MdLogout} from "react-icons/md"
 import { LuTicket } from "react-icons/lu";
 import { usePathname } from "next/navigation"
 
