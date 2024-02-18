@@ -4,7 +4,7 @@ import { LuTicket } from "react-icons/lu";
 
 export default function Sidebar() {
     return (
-        <aside className="w-[280px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border-r-2 bg-slate-50 border-zinc-300 p-3">
+        <aside className="w-[280px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 border-zinc-300 p-3">
             <Image
                 className='my-10'
                 src="/assets/logo.png"

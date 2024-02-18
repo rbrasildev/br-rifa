@@ -1,7 +1,7 @@
 import Image from 'next/image';
 export default function Header() {
     return (
-        <header className='ml-[280px] bg-white flex justify-end'>
+        <header className='ml-[280px] bg-white border border-b flex justify-end'>
             <Image
                 className='rounded-full p-2'
                 src="/assets/avatar.png"
