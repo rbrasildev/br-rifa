@@ -20,8 +20,8 @@ export default function Dashboard({ children }: DashboardProps) {
             <Sidebar />
             <main className="ml-[280px] p-8 h-auto">
                 <div className="p-5">
-                    <h1 className='flex gap-1 items-center text-md'><LuUser className='font-semibold' /> Olá <span className='font-semibold'>rbrasildev</span></h1>
-                    <a href="/admin/raffles/create" className='bg-slate-100 border shadow-sm p-2 rounded-lg hover:bg-slate-50 hover:text-slate-500 my-6 transition-all flex gap-2 w-60'><LuTicket className='text-2xl' /> CRIAR CAMPANHAS</a>
+                    <h1 className='flex gap-1 items-center text-md'><LuUser className='font-semibold animate-bounce' /> Olá <span className='font-semibold'>rbrasildev</span></h1>
+                    <a href="/admin/raffles/create" className='bg-slate-100 border shadow-sm p-2 rounded-lg hover:bg-slate-50 hover:text-slate-500 my-6 transition-all flex gap-2 items-center justify-center w-52'><LuTicket className='text-1xl' /> CRIAR CAMPANHAS</a>
                 </div>
 
                 <h1 className='text-xl flex gap-2'><LuTicket className='text-2xl' /> Minhas campanhas</h1>
