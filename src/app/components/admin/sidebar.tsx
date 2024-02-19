@@ -6,13 +6,13 @@ import { usePathname } from "next/navigation"
 export default function Sidebar() {
     const pathname = usePathname();
     return (
-        <aside className="w-[280px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 border-zinc-300 p-2">
+        <aside className="w-[280px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 p-2">
             <div className="flex justify-center">
                 <Image
                     className='my-10'
                     src="/assets/logo.png"
                     width={100}
-                    height={64}
+                    height={0}
                     alt="BR Rifas"
                 />
             </div>

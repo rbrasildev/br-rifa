@@ -58,7 +58,7 @@ export default function Dashboard({ children }: DashboardProps) {
                             width={1920}
                             height={1080}
                             alt='Rifas'
-                            className='w-full h-full object-cover' // Garanta que a imagem ocupe toda a altura da div
+                            className='w-full h-full object-cover' 
                         />
                     </div>
                     <div className="px-5">
