@@ -1,6 +1,6 @@
 "use client"
 import './css/admin.css'
-import { LuAreaChart, LuEye, LuEyeOff, LuHistory, LuMoreVertical, LuPencil, LuTicket, LuTrophy } from 'react-icons/lu';
+import { LuAreaChart, LuEye, LuEyeOff, LuHistory, LuMoreVertical, LuPencil, LuTicket, LuTrophy, LuUser } from 'react-icons/lu';
 import Image from 'next/image';
 import Sidebar from '../components/admin/sidebar';
 import Header from '../components/admin/header';
@@ -18,16 +18,16 @@ export default function Dashboard({ children }: DashboardProps) {
         <div className="wrap">
             <Header />
             <Sidebar />
-            <main className="ml-[280px] p-3 h-auto">
+            <main className="ml-[280px] p-8 h-auto">
                 <div className="p-5">
-                    <h1>Olá BRRifas</h1>
-                    <button className='bg-slate-100 border shadow-sm p-2 rounded-lg hover:bg-slate-50 hover:text-slate-500 my-6 transition-all flex gap-2'><LuTicket className='text-2xl' /> CRIAR CAMPANHAS</button>
+                    <h1 className='flex gap-1 items-center text-md'><LuUser className='font-semibold' /> Olá <span className='font-semibold'>rbrasildev</span></h1>
+                    <a href="/admin/raffles/create" className='bg-slate-100 border shadow-sm p-2 rounded-lg hover:bg-slate-50 hover:text-slate-500 my-6 transition-all flex gap-2 w-60'><LuTicket className='text-2xl' /> CRIAR CAMPANHAS</a>
                 </div>
 
                 <h1 className='text-xl flex gap-2'><LuTicket className='text-2xl' /> Minhas campanhas</h1>
                 <h4>Aqui estão suas campanhas criadas</h4>
-                <select className='my-2 border rounded-md p-2 px-3 text-lg border-slate-200 outline-none' name="" id="">
-                    <option className='' value="">Em andamento</option>
+                <select className='my-2 border rounded-md p-4 w-1/5 px-4 text-sm border-slate-200 outline-none' name="" id="">
+                    <option className='m-3' value="">Em andamento</option>
                     <option value="">Encerradas</option>
                 </select>
 
@@ -65,13 +65,13 @@ export default function Dashboard({ children }: DashboardProps) {
                         <div className="progress flex flex-col w-full">
                             <p className="text-lg my-6">iphone 15 pro max 256 / 10 premios de 300 reais</p>
                             <div className="progress rounded-xl bg-slate-100 overflow-hidden">
-                                <div className="bg-lime-600 rounded-xl h-2 w-[33%]"> </div>
+                                <div className="bg-[#22C55E] rounded-xl h-2 w-[3.51%]"> </div>
                             </div>
                         </div>
 
                         <p className='my-6'>3,51% de 100.000 bilhetes</p>
                         <div className="badge flex gap-3 my-6">
-                            <button onClick={() => setIsVisible(!isVisible)} className="rounded-2xl font-semibold text-sm text-white px-5 badge-info bg-blue-700 flex items-center gap-3 transition-all">
+                            <button onClick={() => setIsVisible(!isVisible)} className="rounded-2xl font-semibold text-sm text-white px-5 badge-info bg-[#3B82F6] flex items-center gap-3 transition-all">
                                 {
                                     isVisible
                                         ? <LuEye className='text-lg' />
@@ -83,7 +83,7 @@ export default function Dashboard({ children }: DashboardProps) {
 
                                 }
                             </button>
-                            <div className="rounded-2xl font-semibold text-sm text-white px-10 badge-success bg-green-500">PAGOS</div>
+                            <div className="rounded-2xl font-semibold text-sm text-white px-10 badge-success bg-[#22C55E]">PAGOS</div>
                             <div className="rounded-2xl font-semibold text-sm text-white px-10 badge-warning bg-orange-500">RESERVADO</div>
                         </div>
 

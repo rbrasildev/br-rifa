@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="wrap">
       <Sidebar />
       <Header />
-      <main className="ml-[280px] p-3">{children}</main>
+      <main className="ml-[280px] p-16">{children}</main>
     </div>
   );
 }
