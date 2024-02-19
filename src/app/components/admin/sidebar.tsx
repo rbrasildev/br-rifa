@@ -2,11 +2,11 @@
 import Image from "next/image"
 import { LuGraduationCap, LuHistory, LuLogOut, LuMessageSquare, LuSettings, LuTicket, LuTrendingUp } from "react-icons/lu";
 import { usePathname } from "next/navigation"
-
 export default function Sidebar() {
     const pathname = usePathname();
     return (
-        <aside className="w-[280px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 p-2">
+
+        <aside className='w-[250px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 p-2  max-sm:hidden max-md:hidden transition-all'>
             <div className="flex justify-center">
                 <Image
                     className='my-10'

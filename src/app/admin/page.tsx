@@ -2,10 +2,10 @@
 import './css/admin.css'
 import { LuAreaChart, LuEye, LuEyeOff, LuHistory, LuMoreVertical, LuPencil, LuTicket, LuTrophy, LuUser } from 'react-icons/lu';
 import Image from 'next/image';
-import Sidebar from '../components/admin/sidebar';
-import Header from '../components/admin/header';
+
 import { ReactNode, useState } from 'react';
 import { Dropdown } from '../components/Dropdown'
+import DashboardLayout from '../components/admin/layout';
 
 interface DashboardProps {
     children: ReactNode
@@ -15,18 +15,13 @@ export default function Dashboard({ children }: DashboardProps) {
     const [isVisible, setIsVisible] = useState(false)
     const [isVisibleDropdown, setIsVisibleDropdown] = useState(false)
     return (
-        <div className="wrap">
-            <Header />
-            <Sidebar />
-            <main className="ml-[280px] p-8 h-auto">
-                <div className="p-5">
-                    <h1 className='flex gap-1 items-center text-md'><LuUser className='font-semibold animate-bounce' /> Olá <span className='font-semibold'>rbrasildev</span></h1>
-                    <a href="/admin/raffles/create" className='bg-slate-100 border shadow-sm p-2 rounded-lg hover:bg-slate-50 hover:text-slate-500 my-6 transition-all flex gap-2 items-center justify-center w-52'><LuTicket className='text-1xl' /> CRIAR CAMPANHAS</a>
-                </div>
-
+        <DashboardLayout>
+            <div className="container sm:mx-auto md:mx-auto">
+                <h1 className='flex gap-1 items-center text-md'><LuUser className='font-semibold animate-bounce' /> Olá <span className='font-semibold'>rbrasildev</span></h1>
+                <a href="/admin/raffles/create" className='bg-slate-100 border shadow-sm p-2 rounded-lg hover:bg-slate-50 hover:text-slate-500 my-6 transition-all flex gap-2 items-center justify-center w-52'><LuTicket className='text-1xl' /> CRIAR CAMPANHAS</a>
                 <h1 className='text-xl flex gap-2'><LuTicket className='text-2xl' /> Minhas campanhas</h1>
                 <h4>Aqui estão suas campanhas criadas</h4>
-                <select className='my-2 border rounded-md p-4 w-1/5 px-4 text-sm border-slate-200 outline-none' name="" id="">
+                <select className='my-2 border rounded-md p-4 w-1/5 max-sm:w-full max-md:w-full max-lg:w-full px-4 text-sm border-slate-200 outline-none' name="" id="">
                     <option className='m-3' value="">Em andamento</option>
                     <option value="">Encerradas</option>
                 </select>
@@ -58,20 +53,20 @@ export default function Dashboard({ children }: DashboardProps) {
                             width={1920}
                             height={1080}
                             alt='Rifas'
-                            className='w-full h-full object-cover' 
+                            className='w-full h-full object-cover'
                         />
                     </div>
                     <div className="px-5">
                         <div className="progress flex flex-col w-full">
-                            <p className="text-lg my-6">iphone 15 pro max 256 / 10 premios de 300 reais</p>
+                            <p className="text-lg my-3">iphone 15 pro max 256 / 10 premios de 300 reais</p>
                             <div className="progress rounded-xl bg-slate-100 overflow-hidden">
                                 <div className="bg-[#22C55E] rounded-xl h-2 w-[3.51%]"> </div>
                             </div>
                         </div>
 
-                        <p className='my-6'>3,51% de 100.000 bilhetes</p>
-                        <div className="badge flex gap-3 my-6">
-                            <button onClick={() => setIsVisible(!isVisible)} className="rounded-2xl font-semibold text-sm text-white px-5 badge-info bg-[#3B82F6] flex items-center gap-3 transition-all">
+                        <p className='my-3 text-sm flex justify-end'>3,51% de 100.000 bilhetes</p>
+                        <div className="badge flex gap-3 flex-wrap my-4">
+                            <button onClick={() => setIsVisible(!isVisible)} className="rounded-2xl font-semibold text-sm max-sm:w-full  text-white px-5 badge-info bg-[#3B82F6] flex items-center gap-3 transition-all">
                                 {
                                     isVisible
                                         ? <LuEye className='text-lg' />
@@ -83,15 +78,13 @@ export default function Dashboard({ children }: DashboardProps) {
 
                                 }
                             </button>
-                            <div className="rounded-2xl font-semibold text-sm text-white px-10 badge-success bg-[#22C55E]">PAGOS</div>
-                            <div className="rounded-2xl font-semibold text-sm text-white px-10 badge-warning bg-orange-500">RESERVADO</div>
+                            <div className="rounded-2xl font-semibold text-sm max-sm:w-full text-white px-10 badge-success bg-[#22C55E]">PAGOS</div>
+                            <div className="rounded-2xl font-semibold text-sm max-sm:w-full text-white px-10 badge-warning bg-orange-500">RESERVADO</div>
                         </div>
 
                     </div>
-
                 </div>
-
-            </main>
-        </div>
+            </div>
+        </DashboardLayout>
     )
 }
