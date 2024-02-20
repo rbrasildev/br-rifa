@@ -6,7 +6,7 @@ export default function Sidebar() {
     const pathname = usePathname();
     return (
 
-        <aside className='w-[250px] fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 p-2  max-sm:hidden max-md:hidden transition-all'>
+        <aside className='w-auto fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 p-2 max-sm:hidden max-md:hidden max-lg:hidden transition-all'>
             <div className="flex justify-center">
                 <Image
                     className='my-10'

@@ -12,7 +12,6 @@ export default function Header() {
                 height={64}
                 alt="BR Rifas"
             />
-
         </header>
     )
 }

@@ -10,8 +10,7 @@ export default function Orders() {
     return (
         <DashboardLayout>
             <h1 className="font-semibold text-2xl">Histórico de colaborações</h1>
-
-            <div className="card border rounded-t-lg p-4 mt-5 shadow-sm">
+            <div className="card border rounded-t-lg p-6 mt-5 shadow-sm bg-white">
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Selecione uma campanha</label>
                     <div className="flex gap-2 my-2">
@@ -27,7 +26,7 @@ export default function Orders() {
                 </div>
             </div>
 
-            <div className="border border-t-0 rounded-b-lg overflow-hidden">
+            <div className="border border-t-0 rounded-b-lg overflow-hidden bg-white">
                 <div className="p-4 border border-x-0 border-y-0">
                     <div className="flex relative border-t-1 justify-between w-full">
                         <div className="flex gap-2 my-4">
@@ -58,7 +57,7 @@ export default function Orders() {
                         </li>
                     </ul>
                     <div className="border border-b-0 border-t-gray-200 border-x-0 my-4"></div>
-                    <ul className="flex gap-2 mt-2 flex-wrap overflow-scroll max-h-32 ">
+                    <ul className="flex gap-2 mt-2 flex-wrap overflow-scroll overflow-x-hidden max-h-32 ">
                         <li className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E] border-opacity-10 rounded-md p-1 bg-[rgba(22,163,74,.1)]">02054</li>
                         <li className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E] border-opacity-10 rounded-md p-1 bg-[rgba(22,163,74,.1)]">02054</li>
                         <li className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E] border-opacity-10 rounded-md p-1 bg-[rgba(22,163,74,.1)]">02054</li>

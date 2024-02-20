@@ -8,16 +8,20 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   return (
-    <div className="wrap">
+    <div className="wrap relative">
       <button
-        className='absolute left-4 top-5 text-2xl hidden max-sm:block max-md:block'>
+        onClick={() => setIsOpen(false)}
+        className='absolute left-4 top-5 text-2xl hidden max-sm:block max-md:block max-lg:block'>
         <LuAlignLeft />
       </button>
-      <Sidebar />
+      {isOpen ? <Sidebar /> : <Sidebar />}
       <Header />
-      <main className="max-md:ml-0 max-sm:p-3 p-16 ml-[250px]">{children}</main>
+      <main
+        className="max-md:ml-0 max-lg:ml-0 max-sm:p-4 max-md:p-4 max-lg:p-4 p-16 ml-[250px]">
+        {children}
+      </main>
     </div >
   );
 }
