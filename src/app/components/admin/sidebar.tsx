@@ -17,14 +17,14 @@ export default function Sidebar({ classes }: SidebarProps) {
   const pathname = usePathname();
   return (
     <aside
-      className={`${classes} w-auto fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-slate-50 p-2 z-20 transition-all`}
+      className={`${classes} w-auto fixed text-lg text-slate-600 left-0 top-0 bottom-0 border bg-white p-2 z-20 transition-all`}
     >
       <div className="flex justify-center">
         <Image
-          className="my-10"
-          src="/assets/logo.png"
-          width={100}
-          height={0}
+          className='rounded-full my-5 border-[5px] border-[#1ed488] border-rounded-full'
+          src="/assets/avatar.png"
+          width={128}
+          height={128}
           alt="BR Rifas"
         />
       </div>

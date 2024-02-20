@@ -9,7 +9,7 @@ export default function Orders() {
     const [isVisibleDropdown, setIsVisibleDropdown] = useState(false)
     return (
         <DashboardLayout>
-            <h1 className="font-semibold text-2xl">Histórico de colaborações</h1>
+            <h1 className="font-medium text-2xl text-gray-700">Histórico de colaborações</h1>
             <div className="card border rounded-t-lg p-6 mt-5 shadow-sm bg-white">
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Selecione uma campanha</label>
@@ -51,9 +51,9 @@ export default function Orders() {
                         </div>
                     </div>
                     <ul className="flex gap-4 text-gray-400 border-b-1">
-                        <li className="flex items-center max-sm:text-[14px] gap-1"><LuCircleDollarSign />Valor R$ 1,44</li>
-                        <li className="flex items-center max-sm:text-[14px]  gap-1"><LuTicket />6 bilhetes</li>
-                        <li className="flex items-center max-sm:text-[14px]  gap-1"><LuCalendar />Criada em 19/02/2024, 07:14
+                        <li className="flex items-center max-sm:text-[13px] gap-1"><LuCircleDollarSign />Valor R$ 1,44</li>
+                        <li className="flex items-center max-sm:text-[13px]  gap-1"><LuTicket />6 bilhetes</li>
+                        <li className="flex items-center max-sm:text-[13px]  gap-1"><LuCalendar />Criada em 19/02/2024, 07:14
                         </li>
                     </ul>
                     <div className="border border-b-0 border-t-gray-200 border-x-0 my-4"></div>
