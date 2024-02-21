@@ -57,7 +57,7 @@ export default function Sidebar({ classes }: SidebarProps) {
         </li>
         <li>
           <a
-            href="/admin/tutorials"
+            href="#"
             className={`${pathname === '/admin/tutorials' ? 'bg-[#1ed488] bg-opacity-10 text-[#1ed488]' : 'hover:bg-slate-100 transition-all'} flex gap-2 items-center rounded-md p-2`}
           >
             <LuGraduationCap className="text-2xl" />

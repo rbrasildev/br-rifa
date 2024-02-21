@@ -8,11 +8,12 @@ export default function Create() {
             <form>
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Nome da campanha</label>
-                    <input className="border shadow-sm rounded-md p-3 px-4 text-sm border-slate-200 outline-none" type="text" placeholder="Nome da campanha" />
+                    <input className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none" type="text" placeholder="Nome da campanha" />
                 </div>
                 <div className="flex flex-col mb-4">
                     <label className="flex gap-2 items-center" htmlFor="">Quantidade de bilhetes <LuInfo /></label>
-                    <select className="border shadow-sm rounded-md p-3 px-4 text-sm border-slate-200 outline-none" name="qtd" id="qtd">
+                    <select className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none" name="qtd" id="qtd">
+                        <option selected value="">Selecione uma opção</option>
                         <option value="">25 bilhetes - (00 à 24)</option>
                         <option value="">50 bilhetes - (00 à 49)</option>
                         <option value="">100 bilhetes - (000 à 99)</option>
@@ -21,21 +22,25 @@ export default function Create() {
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Nome da campanha</label>
                     <div>
-                        <span className="border rounded-l-md p-[13.5px] px-4 text-sm border-slate-200 outline-none">R$</span>
-                        <input className="border-l-0 border shadow-sm rounded-r-md p-3 px-4 text-sm border-slate-200 outline-none" type="text" placeholder="0,00" />
+                        <span className="border rounded-l-md p-[9.5px] px-3 text-sm border-slate-200 outline-none">R$</span>
+                        <input className="border-l-0 border shadow-sm rounded-r-md p-2 px-4 text-sm border-slate-200 outline-none" type="text" placeholder="0,00" />
                     </div>
                 </div>
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Por onde será o sorteio</label>
-                    <select className="border shadow-sm rounded-md p-3 px-4 text-sm border-slate-200 outline-none" name="qtd" id="qtd">
-                        <option value="">25 bilhetes - (00 à 24)</option>
-                        <option value="">50 bilhetes - (00 à 49)</option>
-                        <option value="">100 bilhetes - (000 à 99)</option>
+                    <select className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none" name="qtd" id="qtd">
+                        <option selected value="">Selecione uma opção</option>
+                        <option value="">Loteria Federal</option>
+                        <option value="">Sorteador.com.br</option>
+                        <option value="">Live no Instagram</option>
+                        <option value="">Live no Youtube</option>
+                        <option value="">Live no TikTok</option>
+                        <option value="">Outros</option>
                     </select>
                 </div>
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Telefone para suporte</label>
-                    <input className="border shadow-sm rounded-md p-3 px-4 text-sm border-slate-200 outline-none" type="text" placeholder="Telefone / WhatsApp" />
+                    <input className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none" type="text" placeholder="Telefone / WhatsApp" />
                 </div>
                 <div className="flex gap-2 mb-4">
                     <input type="checkbox" name="" id="" /> Ao criar esta campanha, você aceita nossos Termos de Uso e a nossa Política de Privacidade.
