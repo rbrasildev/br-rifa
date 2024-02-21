@@ -15,7 +15,6 @@ import {
 import { useState } from 'react';
 
 export default function Orders() {
-  const [isVisible, setIsVisible] = useState(false);
   const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
   const numbers = [
     3490, 28668, 44407, 36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668,
@@ -118,7 +117,10 @@ export default function Orders() {
           <ul className="flex gap-2 mt-2 flex-wrap overflow-scroll overflow-x-hidden max-h-32 ">
             {numbers.map((item) => {
               return (
-                <li className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E]/25 border-opacity-10 rounded-md p-1 bg-[#22C55E]/2">
+                <li
+                  key={item}
+                  className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E]/25 border-opacity-10 rounded-md p-1 bg-[#22C55E]/2"
+                >
                   {item}
                 </li>
               );

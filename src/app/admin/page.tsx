@@ -13,15 +13,11 @@ import {
 } from 'react-icons/lu';
 import Image from 'next/image';
 
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { Dropdown } from '../components/Dropdown';
 import DashboardLayout from '../components/admin/layout';
 
-interface DashboardProps {
-  children: ReactNode;
-}
-
-export default function Dashboard({ children }: DashboardProps) {
+export default function Dashboard() {
   const [isVisible, setIsVisible] = useState(false);
   const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
   return (

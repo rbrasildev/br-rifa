@@ -29,7 +29,10 @@ export default function Ranking() {
       <div className="flex gap-2 flex-wrap">
         {user.map((item) => {
           return (
-            <div className="flex p-6 border rounded-lg shadow">
+            <div
+              key={item.telefone}
+              className="flex p-6 border rounded-lg shadow"
+            >
               <ul>
                 <li>{item.nome}</li>
                 <li>{item.endereco}</li>
