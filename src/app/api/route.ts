@@ -9,6 +9,8 @@ export async function GET() {
     }
   });
 
+  console.log(newUser);
+
   const users = await prisma.user.findMany();
 
   return Response.json(users);

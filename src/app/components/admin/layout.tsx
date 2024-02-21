@@ -31,7 +31,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="wrap relative">
-
       <Sidebar
         classes={isOpen ? 'block' : 'max-sm:hidden max-md:hidden max-lg:hidden'}
       />
@@ -40,9 +39,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         onClick={() => setIsOpen(!isOpen)}
         className="absolute left-4 top-5 text-2xl hidden max-sm:block max-md:block z-30 max-lg:block"
       >
-        <LuAlignLeft
-        className='hover:text-gray-700/50'
-        />
+        <LuAlignLeft className="hover:text-gray-700/50" />
       </button>
       <AnimatePresence>
         {isOpen && windowWidth < 1024 && (
@@ -60,8 +57,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <Header />
       <motion.main
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1}}
-        className="max-md:ml-0 max-lg:ml-0 max-sm:p-4 max-md:p-4 max-lg:p-4 p-16 ml-[250px]">
+        animate={{ opacity: 1 }}
+        className="max-md:ml-0 max-lg:ml-0 max-sm:p-4 max-md:p-4 max-lg:p-4 p-16 ml-[250px]"
+      >
         {children}
       </motion.main>
     </div>

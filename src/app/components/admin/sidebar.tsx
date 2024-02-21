@@ -21,7 +21,7 @@ export default function Sidebar({ classes }: SidebarProps) {
     >
       <div className="flex justify-center">
         <Image
-          className='rounded-full my-5 border-[5px] border-[#1ed488] border-rounded-full'
+          className="rounded-full my-5 border-[5px] border-[#1ed488] border-rounded-full"
           src="/assets/avatar.png"
           width={128}
           height={128}
