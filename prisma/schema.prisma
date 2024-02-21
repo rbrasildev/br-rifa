@@ -14,18 +14,31 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+model Cliente {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  nome     String?
+  telefone String
+  Rifa     Rifa[]
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+model Campanha {
+  id           Int     @id @default(autoincrement())
+  nomeCampanha String
+  qtdBilhete   Int
+  valor        Decimal
+  localSorteio String
+  telefone     String
+  Rifa         Rifa[]
+}
+
+model Rifa {
+  id         Int      @id @default(autoincrement())
+  numero     Int
+  status     String
+  published  Boolean  @default(false)
+  cliente    Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId  Int
+  campanha   Campanha @relation(fields: [campanhaId], references: [id])
+  campanhaId Int
 }
