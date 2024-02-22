@@ -4,8 +4,8 @@ const prisma = new PrismaClient();
 interface CampanhaProps {
   id?: number;
   nomeCampanha: string;
-  qtdBilhete: number;
-  valor: number;
+  qtdBilhete: string;
+  valor: string;
   localSorteio: string;
   telefone: string;
 }
@@ -36,8 +36,8 @@ export async function POST(request: Request) {
     await prisma.campanha.create({
       data: {
         nomeCampanha,
-        qtdBilhete,
-        valor,
+        qtdBilhete: parseInt(qtdBilhete),
+        valor: parseFloat(valor),
         localSorteio,
         telefone
       }

@@ -3,70 +3,74 @@ import DashboardLayout from '@/app/components/admin/layout';
 import { useState } from 'react';
 import { LuArrowRight, LuInfo, LuTicket } from 'react-icons/lu';
 interface CampanhaProps {
-    id: number;
+    id?: number;
     nomeCampanha: string;
-    qtdBilhete: number;
-    valor: number;
+    qtdBilhete: string;
+    valor: string;
     localSorteio: string;
     telefone: string;
 }
-
 export default function Create() {
-    const [formData, setFormData] = useState({});
-    console.log(formData);
-    const handleSubmit = async (e) => {
+    const [form, setForm] = useState<CampanhaProps>({
+        nomeCampanha: '',
+        qtdBilhete: '',
+        valor: '',
+        localSorteio: '',
+        telefone: ''
+    });
+
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        const rawFormData = {
+            nomeCampanha: formData.get('nomeCampanha'),
+            qtdBilhete: formData.get('qtdBilhete'),
+            valor: formData.get('valor'),
+            localSorteio: formData.get('localSorteio'),
+            telefone: formData.get('telefone'),
+        };
+
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(rawFormData),
         };
 
         const url = '/api/campanha';
-
-        fetch(url, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao executar a requisição: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(response => {
-                console.log('Resposta do servidor:', response);
-            })
-            .catch(error => {
-                console.error('Erro ao executar a requisição:', error);
-            });
-
-        setFormData({
+        const response = await fetch(url, requestOptions);
+        if (response.ok) {
+            console.log(response);
+        } else {
+            alert("Erro ao salvar");
+        }
+        setForm({
             nomeCampanha: '',
             qtdBilhete: '',
             valor: '',
             localSorteio: '',
-            telefone: '',
-        });
-
+            telefone: ''
+        })
     };
 
-    // Função para lidar com as mudanças nos campos do formulário
-    const handleChange = (e) => {
-        e.preventDefault();
-        console.log(e.target)
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setForm(prevForm => ({
+            ...prevForm,
             [name]: value
-        });
+        }));
     };
+
     return (
         <DashboardLayout>
             <h1 className="text-3xl flex mb-8 gap-2 items-center font-bold">
                 <LuTicket className="text-3xl" />
                 Criar Campanha
             </h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleFormSubmit}>
                 <div className="flex flex-col mb-4">
                     <label htmlFor="">Nome da campanha</label>
                     <input
@@ -74,8 +78,8 @@ export default function Create() {
                         type="text"
                         placeholder="Nome da campanha"
                         name='nomeCampanha'
-                        value={formData.nomeCampanha}
-                        onChange={handleChange}
+                        value={form.nomeCampanha}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="flex flex-col mb-4">
@@ -86,10 +90,10 @@ export default function Create() {
                         className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none"
                         name="qtdBilhete"
                         id="qtdBilhete"
-                        value={formData.qtdBilhete}
-                        onChange={handleChange}
+                        value={form.qtdBilhete}
+                        onChange={handleInputChange}
                     >
-                        <option selected value="">
+                        <option defaultValue="">
                             Selecione uma opção
                         </option>
                         <option value="25">25 bilhetes - (00 à 24)</option>
@@ -112,8 +116,8 @@ export default function Create() {
                             name='valor'
                             id='valor'
                             placeholder="0,00"
-                            value={formData.valor}
-                            onChange={handleChange}
+                            value={form.valor}
+                        onChange={handleInputChange}
                         />
                     </div>
                 </div>
@@ -123,18 +127,18 @@ export default function Create() {
                         className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none"
                         name="localSorteio"
                         id="localSorteio"
-                        value={formData.localSorteio}
-                        onChange={handleChange}
+                        value={form.localSorteio}
+                        onChange={handleInputChange}
                     >
-                        <option selected value="">
+                        <option defaultValue="">
                             Selecione uma opção
                         </option>
-                        <option value="">Loteria Federal</option>
-                        <option value="">Sorteador.com.br</option>
-                        <option value="">Live no Instagram</option>
-                        <option value="">Live no Youtube</option>
-                        <option value="">Live no TikTok</option>
-                        <option value="">Outros</option>
+                        <option value="Loteria Federal">Loteria Federal</option>
+                        <option value="Sorteador.com.br">Sorteador.com.br</option>
+                        <option value="Live no Instagram">Live no Instagram</option>
+                        <option value="Live no Youtube">Live no Youtube</option>
+                        <option value="Live no TikTok">Live no TikTok</option>
+                        <option value="Outros">Outros</option>
                     </select>
                 </div>
                 <div className="flex flex-col mb-4">
@@ -144,9 +148,9 @@ export default function Create() {
                         type="text"
                         name='telefone'
                         id='telefone'
-                        value={formData.telefone}
-                        onChange={handleChange}
                         placeholder="Telefone / WhatsApp"
+                        value={form.telefone}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="flex gap-2 mb-4">

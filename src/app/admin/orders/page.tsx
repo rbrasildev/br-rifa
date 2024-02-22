@@ -105,7 +105,7 @@ export default async function Orders() {
           <ul className="flex gap-2 mt-2 flex-wrap overflow-scroll overflow-x-hidden max-h-32 ">
             {numbers.map((item) => {
               return (
-                <li className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E]/25 border-opacity-10 rounded-md p-1 bg-[#22C55E]/2">
+                <li key={item} className="flex items-center text-sm text-[#22C55E] border h-[25px] border-[#22C55E]/25 border-opacity-10 rounded-md p-1 bg-[#22C55E]/2">
                   {item}
                 </li>
               );
