@@ -1,23 +1,12 @@
-'use client';
 import './css/admin.css';
-import {
-  LuAreaChart,
-  LuEye,
-  LuEyeOff,
-  LuHistory,
-  LuMoreVertical,
-  LuPencil,
-  LuTicket,
-  LuTrophy,
-  LuUser
-} from 'react-icons/lu';
+import { LuTicket, LuUser } from 'react-icons/lu';
 import Image from 'next/image';
 
-import { useState } from 'react';
-import { Dropdown } from '../components/Dropdown';
 import DashboardLayout from '../components/admin/layout';
+import AdminDropdown from '../components/admin/adminDropdown';
+import AdminCollectButton from '../components/admin/adminCollectButton';
 
-interface CampanhaProps {
+interface DashboardProps {
   id: number;
   nomeCampanha: string;
   qtdBilhete: number;
@@ -26,14 +15,11 @@ interface CampanhaProps {
   telefone: string;
 }
 async function getData() {
-  const response = await fetch('http://localhost:3000/api/campanha')
+  const response = await fetch('http://localhost:3000/api/campanha');
   return response.json();
 }
 export default async function Dashboard() {
-  const [isVisible, setIsVisible] = useState([false]);
-  const [isVisibleDropdown, setIsVisibleDropdown] = useState([false]);
-
-  const campanha: CampanhaProps[] = await getData();
+  const campanha: DashboardProps[] = await getData();
 
   return (
     <DashboardLayout>
@@ -63,77 +49,47 @@ export default async function Dashboard() {
         <option value="">Encerradas</option>
       </select>
       {campanha.map((item) => {
+        return (
+          <div
+            key={item.id}
+            className="my-3 relative rounded-3xl border shadow-sm mb-4 bg-white"
+          >
+            <div className="absolute right-4 top-10">
+              <AdminDropdown item={item} />
+            </div>
 
-        return <div key={item.id} className="my-3 relative rounded-3xl border shadow-sm mb-4 bg-white">
-          <div className="absolute right-4 top-10">
-            <Dropdown.Root>
-              <Dropdown.Button
-                onBlur={() => setIsVisibleDropdown(prevState => ({ ...prevState, [item.id]: false }))}
-                onClick={() => setIsVisibleDropdown(prevState => ({ ...prevState, [item.id]: !prevState[item.id] }))}
-                icon={LuMoreVertical}
-                iconClass=""
-                className="border outline-none text-black border-slate-200 p-3 flex items-center rounded-lg m-2 bg-slate-50 justify-center w-10 h-10"
+            <div className="h-32 bg-slate-600 overflow-hidden rounded-t-3xl">
+              <Image
+                src="/assets/banner.png"
+                width={1920}
+                height={1080}
+                alt="Rifas"
+                className="w-full h-full object-cover"
               />
-              {isVisibleDropdown[item.id] && (
-                <Dropdown.Items>
-                  <Dropdown.Item icon={LuEye} text="Visualizar" link="#" />
-                  <Dropdown.Item icon={LuPencil} text="Editar" link="#" />
-                  <Dropdown.Item icon={LuAreaChart} text="Ranking" link="#" />
-                  <Dropdown.Item icon={LuHistory} text="Histórico" link="#" />
-                  <Dropdown.Item
-                    icon={LuTrophy}
-                    text="Informar Vencedor"
-                    link="#"
-                  />
-                </Dropdown.Items>
-              )}
-            </Dropdown.Root>
-          </div>
+            </div>
+            <div className="px-5">
+              <div className="progress flex flex-col w-full">
+                <p className="text-lg my-3">{item.nomeCampanha}</p>
+                <div className="progress rounded-xl bg-slate-100 overflow-hidden">
+                  <div className="bg-[#22C55E] rounded-xl h-2 w-[3.51%]"> </div>
+                </div>
+              </div>
 
-          <div className="h-32 bg-slate-600 overflow-hidden rounded-t-3xl">
-            <Image
-              src="/assets/banner.png"
-              width={1920}
-              height={1080}
-              alt="Rifas"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="px-5">
-            <div className="progress flex flex-col w-full">
-              <p className="text-lg my-3">
-                {item.nomeCampanha}
+              <p className="my-3 text-sm flex justify-end">
+                3,51% de {item.qtdBilhete} bilhetes
               </p>
-              <div className="progress rounded-xl bg-slate-100 overflow-hidden">
-                <div className="bg-[#22C55E] rounded-xl h-2 w-[3.51%]"> </div>
-              </div>
-            </div>
-
-            <p className="my-3 text-sm flex justify-end">
-              3,51% de {item.qtdBilhete} bilhetes
-            </p>
-            <div className="badge flex gap-2 flex-wrap my-4">
-              <button
-                onClick={() => setIsVisible(prevState => ({ ...prevState, [item.id]: !prevState[item.id] }))}
-                className="rounded-2xl font-medium text-sm  text-white px-4 badge-info bg-[#3B82F6] flex items-center gap-2"
-              >
-                {isVisible[item.id] ? (
-                  <LuEye className="text-lg" />
-                ) : (
-                  <LuEyeOff className="text-lg" />
-                )}
-                ARRECADOU
-                {isVisible[item.id] && ' R$ 846,16'}
-              </button>
-              <div className="rounded-2xl font-medium text-sm text-white px-4 badge-success bg-[#22C55E]">
-                PAGOS 3.758
-              </div>
-              <div className="rounded-2xl font-medium text-sm text-white px-4 badge-warning bg-orange-500">
-                RESERVADO 0
+              <div className="badge flex gap-2 flex-wrap my-4">
+                <AdminCollectButton item={item} />
+                <div className="rounded-2xl font-medium text-sm text-white px-4 badge-success bg-[#22C55E]">
+                  PAGOS 3.758 A
+                </div>
+                <div className="rounded-2xl font-medium text-sm text-white px-4 badge-warning bg-orange-500">
+                  RESERVADO 0
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        );
       })}
     </DashboardLayout>
   );

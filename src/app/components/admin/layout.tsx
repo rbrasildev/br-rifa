@@ -1,10 +1,11 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, Suspense, useEffect, useState } from 'react';
 
 import Sidebar from './sidebar';
 import Header from './header';
 import { LuAlignLeft } from 'react-icons/lu';
+import Loading from './loading';
 interface DashboardLayoutProps {
   children: ReactNode;
 }
@@ -55,13 +56,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </AnimatePresence>
 
       <Header />
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="max-md:ml-0 max-lg:ml-0 max-sm:p-4 max-md:p-4 max-lg:p-4 p-16 ml-[250px]"
-      >
-        {children}
-      </motion.main>
+      <Suspense fallback={<Loading />}>
+        <main className="max-md:ml-0 max-lg:ml-0 max-sm:p-4 max-md:p-4 max-lg:p-4 p-16 ml-[250px]">
+          {children}
+        </main>
+      </Suspense>
     </div>
   );
 }
