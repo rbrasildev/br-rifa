@@ -19,7 +19,9 @@ interface CampanhaProps {
 }
 
 async function getData() {
-  const response = await fetch('https://br-rifa-frontend.vercel.app/api/campanha');
+  const response = await fetch(
+    'https://br-rifa-frontend.vercel.app/api/campanha'
+  );
   return response.json();
 }
 export default async function Orders() {
