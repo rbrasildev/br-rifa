@@ -15,7 +15,7 @@ interface DashboardProps {
   telefone: string;
 }
 async function getData() {
-  const response = await fetch('http://localhost:3000/api/campanha');
+  const response = await fetch('/api/campanha');
   return response.json();
 }
 export default async function Dashboard() {
