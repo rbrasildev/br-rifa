@@ -1,5 +1,5 @@
 import Image from "next/image"
-
+import React from "react"
 
 import { LuClover, LuInstagram, LuPhoneCall, LuSearch } from "react-icons/lu"
 
