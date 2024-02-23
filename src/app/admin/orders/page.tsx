@@ -24,6 +24,7 @@ async function getData() {
   );
   return response.json();
 }
+
 export default async function Orders() {
   const campanha: CampanhaProps[] = await getData();
 
@@ -37,6 +38,7 @@ export default async function Orders() {
     36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668, 44407, 36863, 87748,
     11444, 42944, 74872, 42318, 34585
   ];
+  
   return (
     <DashboardLayout>
       <h1 className="font-medium text-2xl text-gray-700">
