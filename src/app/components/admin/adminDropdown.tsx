@@ -26,12 +26,12 @@ export default function AdminDropdown({ item }: AdminDropdown) {
   return (
     <Dropdown.Root>
       <Dropdown.Button
-        onBlur={() =>
-          setIsVisibleDropdown((prevState) => ({
-            ...prevState,
-            [item.id]: false
-          }))
-        }
+        // onBlur={() =>
+        //   setIsVisibleDropdown((prevState) => ({
+        //     ...prevState,
+        //     [item.id]: false
+        //   }))
+        // }
         onClick={() =>
           setIsVisibleDropdown((prevState) => ({
             ...prevState,
@@ -44,8 +44,8 @@ export default function AdminDropdown({ item }: AdminDropdown) {
       />
       {isVisibleDropdown[item.id] && (
         <Dropdown.Items>
-          <Dropdown.Item icon={LuEye} text="Visualizar" link="#" />
-          <Dropdown.Item icon={LuPencil} text="Editar" link="#" />
+          <Dropdown.Item icon={LuEye} text="Visualizar" link={`campanha/${item.id}`} />
+          <Dropdown.Item icon={LuPencil} text="Editar" link="/campanha" />
           <Dropdown.Item icon={LuAreaChart} text="Ranking" link="#" />
           <Dropdown.Item icon={LuHistory} text="Histórico" link="#" />
           <Dropdown.Item icon={LuTrophy} text="Informar Vencedor" link="#" />

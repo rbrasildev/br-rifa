@@ -40,7 +40,7 @@ export default function Create() {
       body: JSON.stringify(rawFormData)
     };
 
-    const url = 'https://br-rifa-frontend.vercel.app/api/campanha';
+    const url = '/api/campanha';
     const response = await fetch(url, requestOptions);
     if (response.ok) {
       console.log(response);

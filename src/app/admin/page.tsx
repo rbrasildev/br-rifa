@@ -16,7 +16,7 @@ interface DashboardProps {
 }
 async function getData() {
   const response = await fetch(
-    'https://br-rifa-frontend.vercel.app/api/campanha'
+    'https://br-rifa-frontend.vercel.app/api/campanha/'
   );
   return response.json();
 }
