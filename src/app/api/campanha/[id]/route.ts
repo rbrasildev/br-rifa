@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function GET(
-  request: Request,
+request: Request,
   { params }: { params: { id: string } }
 ) {
   const id = parseInt(params.id);

@@ -22,7 +22,7 @@ async function getData() {
 }
 export default async function Dashboard() {
   const campanha: DashboardProps[] = await getData();
-
+ 
   return (
     <DashboardLayout>
       <h1 className="flex gap-1 items-center text-md">
@@ -73,7 +73,7 @@ export default async function Dashboard() {
               <div className="progress flex flex-col w-full">
                 <p className="text-lg my-3">{item.nomeCampanha}</p>
                 <div className="progress rounded-xl bg-slate-100 overflow-hidden">
-                  <div className="bg-[#22C55E] rounded-xl h-2 w-[3.51%]"> </div>
+                  <div className={`bg-[#22C55E] rounded-xl h-2 w-[3.51%]`}> </div>
                 </div>
               </div>
 

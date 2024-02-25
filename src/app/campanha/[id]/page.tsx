@@ -1,7 +1,8 @@
+'use client'
 import Image from "next/image"
-
-
+import { useState } from "react"
 import { LuClover, LuInstagram, LuPhoneCall, LuSearch } from "react-icons/lu"
+import Api from "../api"
 
 interface CampanhaProps {
     parambs: {
@@ -15,8 +16,7 @@ interface CampanhaProps {
 }
 
 export default async function Campanha({ params: { id } }) {
-
-
+    const [valor, setValor] = useState(1);
     async function getData(): Promise<CampanhaProps> {
         const response = await fetch(
             `https://br-rifa-frontend.vercel.app/api/campanha/${id}`
@@ -24,6 +24,16 @@ export default async function Campanha({ params: { id } }) {
         return response.json();
     }
     const campanha = await getData();
+
+    const handleIncremnt = () => {
+        setValor(valor + 1)
+    }
+    const handleDecrement = () => {
+        setValor(valor - 1)
+    }
+    const handleSpecificValue = (specificValue: number) => {
+        setValor(valor + specificValue)
+    }
 
     return (
         <div className="text-gray-600">
@@ -41,7 +51,7 @@ export default async function Campanha({ params: { id } }) {
                 </div>
             </header>
 
-            <div className="my-5 grid place-content-center max-md:p-3 max-lg:p-3">
+            <div className="my-5 grid place-content-center max-sm:p-3 max-md:p-3 max-lg:p-3">
                 <div className="relative">
                     <Image
                         className="rounded-3xl relative"
@@ -50,7 +60,7 @@ export default async function Campanha({ params: { id } }) {
                         height={720}
                         alt="Banner"
                     />
-                    <div className="absolute bottom-0 left-0 m-10 max-md:m-4 rounded-md text-sm bg-slate-50 p-3">Participe por apenas: <span className="font-bold">R$ {campanha.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</span>🔥</div>
+                    <div className="absolute bottom-0 left-0 m-10 max-md:m-4 rounded-md text-sm bg-slate-50 p-3">Participe por apenas: <span className="font-bold">R$ {campanha.valor}</span>🔥</div>
                 </div>
 
                 <h1 className="text-gray-700 font-bold text-2xl my-4">{campanha.nomeCampanha}</h1>
@@ -122,27 +132,33 @@ export default async function Campanha({ params: { id } }) {
                     <p className="my-6 font-semibold translate-x-[-25px] text-center">SELECIONE A QUANTIDADE DE BILHETES</p>
                     <div className="text-sm mb-6 flex justify-center">
                         <div className="flex flex-col  gap-2 w-[70%]">
-                            <div className="flex gap-2 justify-between">
+                            <div className="flex max-sm:gap-1 gap-2 justify-between">
                                 <button
-                                    className="p-2 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
+                                    onClick={() => handleSpecificValue(1)}
+                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
                                 >+1</button>
                                 <button
-                                    className="p-2 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
+                                    onClick={() => handleSpecificValue(5)}
+                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
                                 >+5</button>
                                 <button
-                                    className="p-2 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
+                                    onClick={() => handleSpecificValue(10)}
+                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
                                 >+10</button>
                                 <button
-                                    className="p-2 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
+                                    onClick={() => handleSpecificValue(100)}
+                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
                                 >+100</button>
 
                             </div>
                             <div className="flex justify-between gap-1">
                                 <button
+                                    onClick={handleDecrement}
                                     className="p-2 shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
                                 >-</button>
-                                <input value={1} className="shadow-sm w-full text-center rounded-md border p-2 outline-none transition-all hover:bg-slate-100/50" type="number" />
+                                <input value={valor} className="shadow-sm w-full text-center rounded-md border p-2 outline-none transition-all hover:bg-slate-100/50" type="number" />
                                 <button
+                                    onClick={handleIncremnt}
                                     className="p-2  shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
                                 >+</button>
                             </div>
@@ -152,9 +168,9 @@ export default async function Campanha({ params: { id } }) {
                             </div>
                             <button className="p-2 shadow-sm rounded-md font-semibold text-white transition-all bg-[#4ADE80] hover:bg-[#4ADE80]/50">RESERVAR</button>
                         </div>
-
                     </div>
                 </div>
+
                 <div className="grid grid-cols-2 gap-2">
                     <div className="p-4 border shadow-sm bg-white rounded-lg">
                         <p className="font-bold">MEIO DE PAGAMENTO</p>
@@ -162,7 +178,7 @@ export default async function Campanha({ params: { id } }) {
                     </div>
                     <div className="p-4 border shadow-sm bg-white rounded-lg">
                         <p className="font-bold">SORTEIO</p>
-                        <p className="flex items-center"><LuClover className="text-[#00D26A]"/>Loteria federal</p>
+                        <p className="flex items-center"><LuClover className="text-[#00D26A]" />Loteria federal</p>
                     </div>
                 </div>
             </div>
