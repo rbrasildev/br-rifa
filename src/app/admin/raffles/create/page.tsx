@@ -1,5 +1,6 @@
 'use client';
 import DashboardLayout from '@/app/components/admin/layout';
+import { Select } from 'antd';
 import { useState } from 'react';
 import { LuArrowRight, LuInfo, LuTicket } from 'react-icons/lu';
 interface CampanhaProps {
@@ -90,21 +91,38 @@ export default function Create() {
           <label className="flex gap-2 items-center" htmlFor="">
             Quantidade de bilhetes <LuInfo />
           </label>
-          <select
-            className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none"
-            name="qtdBilhete"
+          <Select
+            className='h-10 shadow-sm'
+            defaultValue="Escolha uma opção"
             id="qtdBilhete"
-            value={form.qtdBilhete}
-            onChange={handleInputChange}
-          >
-            <option defaultValue="">Selecione uma opção</option>
-            <option value="25">25 bilhetes - (00 à 24)</option>
-            <option value="50">50 bilhetes - (00 à 49)</option>
-            <option value="100">100 bilhetes - (000 à 99)</option>
-            <option value="200">100 bilhetes - (000 à 199)</option>
-            <option value="200">500 bilhetes - (000 à 499)</option>
-            <option value="200">1000 bilhetes - (0000 à 999)</option>
-          </select>
+            options={[
+              {
+                value: 25,
+                label: '25 bilhetes - (00 à 24)'
+              },
+              {
+                value: 50,
+                label: '50 bilhetes - (00 à 49)'
+              },
+              {
+                value: 100,
+                label: '100 bilhetes - (000 à 99)'
+              },
+              {
+                value: 200,
+                label: '200 bilhetes - (000 à 199)'
+              },
+              {
+                value: 500,
+                label: '500 bilhetes - (000 à 499)'
+              },
+              {
+                value: 1000,
+                label: '1000 bilhetes - (0000 à 999)'
+              },
+            ]}
+          />
+
         </div>
         <div className="flex flex-col mb-4">
           <label htmlFor="">Valor do bilhete</label>
@@ -123,23 +141,21 @@ export default function Create() {
             />
           </div>
         </div>
+
         <div className="flex flex-col mb-4">
           <label htmlFor="">Por onde será o sorteio</label>
-          <select
-            className="border shadow-sm rounded-md p-2 px-4 text-sm border-slate-200 outline-none"
-            name="localSorteio"
-            id="localSorteio"
-            value={form.localSorteio}
-            onChange={handleInputChange}
-          >
-            <option defaultValue="">Selecione uma opção</option>
-            <option value="Loteria Federal">Loteria Federal</option>
-            <option value="Sorteador.com.br">Sorteador.com.br</option>
-            <option value="Live no Instagram">Live no Instagram</option>
-            <option value="Live no Youtube">Live no Youtube</option>
-            <option value="Live no TikTok">Live no TikTok</option>
-            <option value="Outros">Outros</option>
-          </select>
+          <Select
+            defaultValue="Selecione uma opção"
+            className="h-10 shadow-sm"
+            options={[
+              { value: 1, label: "Loteria Federal" },
+              { value: 2, label: "Sorteador.com.br" },
+              { value: 3, label: "Live no Instagram" },
+              { value: 4, label: "Live no Youtube" },
+              { value: 5, label: "Live no TikTok" },
+              { value: 6, label: "Outros" }
+            ]}
+          />
         </div>
         <div className="flex flex-col mb-4">
           <label htmlFor="">Telefone para suporte</label>

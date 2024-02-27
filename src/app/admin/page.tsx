@@ -6,7 +6,7 @@ import Image from 'next/image';
 import DashboardLayout from '../components/admin/layout';
 import AdminDropdown from '../components/admin/adminDropdown';
 import AdminCollectButton from '../components/admin/adminCollectButton';
-import { Select } from 'antd';
+import { Select, Flex, Progress } from 'antd';
 
 
 
@@ -25,8 +25,9 @@ async function getData() {
   return response.json();
 }
 export default async function Dashboard() {
-  const campanha: DashboardProps[] = await getData();
 
+  const campanha: DashboardProps[] = await getData();
+  let rand = Math.floor(Math.random() * 100);
   return (
     <DashboardLayout>
 
@@ -80,12 +81,13 @@ export default async function Dashboard() {
               />
             </div>
             <div className="px-5">
-              <div className="progress flex flex-col w-full">
-                <p className="text-lg my-3">{item.nomeCampanha}</p>
-                <div className="progress rounded-xl bg-slate-100 overflow-hidden">
-                  <div className={`bg-[#22C55E] rounded-xl h-2 w-[3.51%]`}> </div>
-                </div>
-              </div>
+              <p className="text-lg my-3">{item.nomeCampanha}</p>
+              <Flex>
+                <Progress percent={rand}
+                  status='active'
+                  showInfo={false}
+                />
+              </Flex>
 
               <p className="my-3 text-sm flex justify-end">
                 3,51% de {item.qtdBilhete} bilhetes

@@ -10,6 +10,7 @@ import {
 import OrdersDropdown from '@/app/components/orders/ordersDropdown';
 import { Select } from 'antd';
 import { Labrada } from 'next/font/google';
+import { color } from 'framer-motion';
 
 interface CampanhaProps {
   id: number;
@@ -49,24 +50,22 @@ export default async function Orders() {
       <div className="card border rounded-t-lg px-8 py-4 mt-5 shadow-sm bg-white">
         <div className="flex flex-col mb-4">
           <label htmlFor="">Selecione uma campanha</label>
-          <div className="flex gap-2 my-2 relative">
+          <div className="flex max-sm:flex-col gap-2 my-2 relative">
             <Select
               defaultValue="Selecione uma campanha"
               className='w-full h-10'
-
               options={campanha.map((item) => ({
                 value: item.id,
                 label: item.nomeCampanha
               }))}
             />
 
-
-            <div className="flex gap-2">
-              <button className="flex gap-1 items-center p-2 px-4 border shadow-sm rounded-md border-gray-300/90 hover:bg-slate-100/50  text-gray-600">
+            <div className="flex gap-1">
+              <button className="flex gap-1 items-center p-2 text-sm px-4 border shadow-sm rounded-md border-gray-300/90 hover:bg-slate-100/50  text-gray-600">
                 <LuEyeOff />
                 Dados
               </button>
-              <button className="flex gap-1 items-center p-2 px-4 border shadow-sm rounded-md border-gray-300/90 hover:bg-slate-100/50  text-gray-600">
+              <button className="flex gap-1 items-center p-2 text-sm px-4 border shadow-sm rounded-md border-gray-300/90 hover:bg-slate-100/50  text-gray-600">
                 <LuFilter />
                 Filtro
               </button>

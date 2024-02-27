@@ -1,10 +1,10 @@
 'use client'
 import Image from "next/image"
 
-import React from "react"
+import React, { useState } from "react"
 
 import { LuClover, LuInstagram, LuPhoneCall, LuSearch } from "react-icons/lu"
-
+import { Button, Modal, Skeleton, SkeletonProps } from 'antd';
 
 interface CampanhaProps {
     parambs: {
@@ -17,15 +17,32 @@ interface CampanhaProps {
     telefone: string,
 }
 
-export default async function Campanha({ params: { id } }) {
+export default function Campanha({ params: { id } }) {
+    <Skeleton />
     const [valor, setValor] = useState(1);
-    async function getData(): Promise<CampanhaProps> {
-        const response = await fetch(
-            `https://br-rifa-frontend.vercel.app/api/campanha/${id}`
-        );
-        return response.json();
-    }
-    const campanha = await getData();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    // async function getData(): Promise<CampanhaProps> {
+    //     const response = await fetch(
+    //         `https://br-rifa-frontend.vercel.app/api/campanha/${id}`
+    //     );
+    //     return response.json();
+    // }
+    // const campanha = await getData();
+
+    const campanha = [{}];
 
     const handleIncremnt = () => {
         setValor(valor + 1)
@@ -38,6 +55,7 @@ export default async function Campanha({ params: { id } }) {
     }
 
     return (
+
         <div className="text-gray-600">
             <header className="border p-3">
                 <div className="w-full container mx-auto flex justify-between">
@@ -168,7 +186,13 @@ export default async function Campanha({ params: { id } }) {
                                 <span>Valor final</span>
                                 <span>R$ 0,24</span>
                             </div>
-                            <button className="p-2 shadow-sm rounded-md font-semibold text-white transition-all bg-[#4ADE80] hover:bg-[#4ADE80]/50">RESERVAR</button>
+                            {/* <button onClick={showModal} className="p-2 shadow-sm rounded-md font-semibold text-white transition-all bg-[#4ADE80] hover:bg-[#4ADE80]/50">RESERVAR</button> */}
+                            <Button onClick={showModal} className="bg-[#4ADE80]" type="primary">RESERVAR</Button>
+                            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                                <p>Some contents...</p>
+                                <p>Some contents...</p>
+                                <p>Some contents...</p>
+                            </Modal>
                         </div>
                     </div>
                 </div>
@@ -184,8 +208,8 @@ export default async function Campanha({ params: { id } }) {
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     )
 }
 
