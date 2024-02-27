@@ -8,6 +8,8 @@ import {
   LuTicket
 } from 'react-icons/lu';
 import OrdersDropdown from '@/app/components/orders/ordersDropdown';
+import { Select } from 'antd';
+import { Labrada } from 'next/font/google';
 
 interface CampanhaProps {
   id: number;
@@ -38,7 +40,7 @@ export default async function Orders() {
     36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668, 44407, 36863, 87748,
     11444, 42944, 74872, 42318, 34585
   ];
-  
+
   return (
     <DashboardLayout>
       <h1 className="font-medium text-2xl text-gray-700">
@@ -48,20 +50,16 @@ export default async function Orders() {
         <div className="flex flex-col mb-4">
           <label htmlFor="">Selecione uma campanha</label>
           <div className="flex gap-2 my-2 relative">
-            <select
-              className="border shadow-sm appearance-none rounded-md p-2 px-4 text-sm border-gray-300/90 outline-none w-full"
-              name="nomeCampanha"
-              id="nomeCampanha"
-            >
-              {campanha.map((item) => {
-                return (
-                  <option key={item.id} value="">
-                    {item.nomeCampanha}
-                  </option>
-                );
-              })}
-            </select>
-            <LuChevronDown className="absolute top-4 right-[220px]" />
+            <Select
+              defaultValue="Selecione uma campanha"
+              className='w-full h-10'
+
+              options={campanha.map((item) => ({
+                value: item.id,
+                label: item.nomeCampanha
+              }))}
+            />
+
 
             <div className="flex gap-2">
               <button className="flex gap-1 items-center p-2 px-4 border shadow-sm rounded-md border-gray-300/90 hover:bg-slate-100/50  text-gray-600">

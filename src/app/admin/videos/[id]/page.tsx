@@ -1,26 +1,19 @@
 'use client'
 import DashboardLayout from "@/app/components/admin/layout"
-import { useEffect, useState } from "react"
 
-export default function PageVideo({ params: { id } }) {
-    const [video, setVideo] = useState([])
-    console.log(video)
-    useEffect(() => {
-        fetch(`https://api-estoque-nodejs.onrender.com/videos/${id}`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setVideo(data);
-            })
-            .then((error) => {
-                console.log(error)
-            })
-    }, [])
 
+export default async function PageVideo({ params: { id } }) {
+    async function getData() {
+        const data = await fetch(`https://api-estoque-nodejs.onrender.com/videos/${id}`)
+        return data.json();
+    }
+
+    const videos = await getData();
+    console.log(videos)
     return (
         <DashboardLayout>
-            <h1>VIdeos</h1>
+            <h1>{videos[0].title}</h1>
+            <p>{videos[0].description}</p>
         </DashboardLayout>
     )
 }

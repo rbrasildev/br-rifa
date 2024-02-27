@@ -1,3 +1,4 @@
+
 import './css/admin.css';
 import { LuTicket, LuUser } from 'react-icons/lu';
 import Image from 'next/image';
@@ -5,6 +6,9 @@ import Image from 'next/image';
 import DashboardLayout from '../components/admin/layout';
 import AdminDropdown from '../components/admin/adminDropdown';
 import AdminCollectButton from '../components/admin/adminCollectButton';
+import { Select } from 'antd';
+
+
 
 interface DashboardProps {
   id: number;
@@ -22,9 +26,11 @@ async function getData() {
 }
 export default async function Dashboard() {
   const campanha: DashboardProps[] = await getData();
- 
+
   return (
     <DashboardLayout>
+
+
       <h1 className="flex gap-1 items-center text-md">
         <LuUser className="font-semibold animate-bounce" /> Olá{' '}
         <span className="font-semibold">rbrasildev</span>
@@ -40,16 +46,20 @@ export default async function Dashboard() {
       </h1>
       <h4 className="text-gray-600">Aqui estão suas campanhas criadas</h4>
 
-      <select
-        className="my-2 border rounded-md p-3 w-1/5 max-sm:w-full max-md:w-full max-lg:w-full px-4 text-sm font-medium text-gray-500 border-slate-200 outline-none hover:bg-slate-100 hover:bg-opacity-5 transition-all"
-        name="status"
-        id="sstatus"
-      >
-        <option className="m-3" value="">
-          Em andamento
-        </option>
-        <option value="">Encerradas</option>
-      </select>
+      <Select
+        defaultValue="Em andamento"
+        style={{ width: 250, height: 40 }}
+        options={[
+          {
+            value: 'andamento',
+            label: 'Em andamento',
+          },
+          {
+            value: 'encerradas',
+            label: 'Encerradas',
+          },
+        ]}
+      />
       {campanha.map((item) => {
         return (
           <div
@@ -93,6 +103,7 @@ export default async function Dashboard() {
           </div>
         );
       })}
+
     </DashboardLayout>
   );
 }
