@@ -31,7 +31,6 @@ export default async function Dashboard() {
   return (
     <DashboardLayout>
 
-
       <h1 className="flex gap-1 items-center text-md">
         <LuUser className="font-semibold animate-bounce" /> Olá{' '}
         <span className="font-semibold">rbrasildev</span>

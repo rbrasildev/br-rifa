@@ -3,8 +3,10 @@ import Image from "next/image"
 
 import React, { useState } from "react"
 
-import { LuClover, LuInstagram, LuPhoneCall, LuSearch } from "react-icons/lu"
-import { Button, Modal, Skeleton, SkeletonProps } from 'antd';
+import { LuAnchor, LuClover, LuInstagram, LuMail, LuPhone, LuPhoneCall, LuSearch } from "react-icons/lu"
+import { Button, Modal, Skeleton, SkeletonProps, Space, Input } from 'antd';
+import Search, { SearchProps } from "antd/es/input/Search";
+
 
 interface CampanhaProps {
     parambs: {
@@ -18,7 +20,7 @@ interface CampanhaProps {
 }
 
 export default function Campanha({ params: { id } }) {
-    <Skeleton />
+
     const [valor, setValor] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -53,6 +55,7 @@ export default function Campanha({ params: { id } }) {
     const handleSpecificValue = (specificValue: number) => {
         setValor(valor + specificValue)
     }
+
 
     return (
 
@@ -188,10 +191,34 @@ export default function Campanha({ params: { id } }) {
                             </div>
                             {/* <button onClick={showModal} className="p-2 shadow-sm rounded-md font-semibold text-white transition-all bg-[#4ADE80] hover:bg-[#4ADE80]/50">RESERVAR</button> */}
                             <Button onClick={showModal} className="bg-[#4ADE80]" type="primary">RESERVAR</Button>
-                            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                                <p>Some contents...</p>
-                                <p>Some contents...</p>
-                                <p>Some contents...</p>
+                            <Modal title="Reservar bilhetes" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} className="">
+                                <Space direction="vertical" style={{ width: '100%' }}>
+                                    <Input
+                                        addonBefore={<LuAnchor />}
+                                        placeholder="Nome complento"
+                                        allowClear
+                                    />
+                                    <Input
+                                        addonBefore={<LuMail />}
+                                        placeholder="Digite seu email"
+                                        allowClear
+                                        className="w-full"
+                                    />
+                                    <Input
+                                        addonBefore={<LuPhone />}
+                                        placeholder="Telefone / WhatsApp"
+                                        allowClear
+                                    />
+                                    <Input
+                                        addonBefore={<LuPhone />}
+                                        placeholder="Repita o telefone"
+                                        allowClear
+                                    />
+                                </Space>
+                                <div className="flex gap-4 items-start mt-3">
+                                    <input type="checkbox" name="" id="" />
+                                    <p>Li e concordo com os Termos e Condições e estou ciente de que essa reserva me vincula apenas à esta campanha criada pelo(a) organizador(a) e NÃO à plataforma.</p>
+                                </div>
                             </Modal>
                         </div>
                     </div>
@@ -209,7 +236,7 @@ export default function Campanha({ params: { id } }) {
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 
