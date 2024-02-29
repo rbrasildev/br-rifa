@@ -6,6 +6,7 @@ import Sidebar from './sidebar';
 import Header from './header';
 import { LuAlignLeft } from 'react-icons/lu';
 import Loading from './loading';
+
 interface DashboardLayoutProps {
   children: ReactNode;
 }

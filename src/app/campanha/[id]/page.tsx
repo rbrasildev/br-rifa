@@ -1,17 +1,15 @@
 'use client'
 import Image from "next/image"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { LuAnchor, LuClover, LuInstagram, LuMail, LuPhone, LuPhoneCall, LuSearch } from "react-icons/lu"
-import { Button, Modal, Skeleton, SkeletonProps, Space, Input } from 'antd';
-import Search, { SearchProps } from "antd/es/input/Search";
+import { Button, Modal, Space, Input, Divider } from 'antd';
+import getData from "../api";
 
 
 interface CampanhaProps {
-    parambs: {
-        id: number
-    }
+    id: number,
     nomeCampanha: string,
     qtdBilhete: number,
     valor: number,
@@ -19,10 +17,47 @@ interface CampanhaProps {
     telefone: string,
 }
 
-export default function Campanha({ params: { id } }) {
-
-    const [valor, setValor] = useState(1);
+export default function Campanha({ params: { id } }: { params: { id: string } }) {
+    const [campanha, setCampanha] = useState<CampanhaProps>({
+        id: 0,
+        nomeCampanha: '',
+        qtdBilhete: 0,
+        valor: 0,
+        localSorteio: '',
+        telefone: ''
+    })
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [qtdBilhetes, setQtdBilhetes] = useState(1);
+    const [formData, setFormData] = useState({
+        qtd: '',
+        nome: '',
+        email: '',
+        telefone: '',
+        telefoneRepetido: '',
+    });
+
+    useEffect(() => {
+        setCampanha(await getData(id))
+    }, [])
+
+    const handleChange = (e: any) => {
+        e.preventDefault()
+
+        setFormData({
+            ...formData,
+            ['qtd']: qtdBilhetes.toString(),
+        });
+        const { name, value } = e.target;
+
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const getFormData = () => {
+        return formData;
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -30,30 +65,27 @@ export default function Campanha({ params: { id } }) {
 
     const handleOk = () => {
         setIsModalOpen(false);
+        let newData = getFormData()
+
+        newData.qtd = qtdBilhetes.toString();
+        const data = newData;
+        console.log(data)
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
     };
 
-    // async function getData(): Promise<CampanhaProps> {
-    //     const response = await fetch(
-    //         `https://br-rifa-frontend.vercel.app/api/campanha/${id}`
-    //     );
-    //     return response.json();
-    // }
-    // const campanha = await getData();
 
-    const campanha = [{}];
 
     const handleIncremnt = () => {
-        setValor(valor + 1)
+        setQtdBilhetes(qtdBilhetes + 1)
     }
     const handleDecrement = () => {
-        setValor(valor - 1)
+        setQtdBilhetes(qtdBilhetes - 1)
     }
     const handleSpecificValue = (specificValue: number) => {
-        setValor(valor + specificValue)
+        setQtdBilhetes(qtdBilhetes + specificValue)
     }
 
 
@@ -87,7 +119,9 @@ export default function Campanha({ params: { id } }) {
                 </div>
 
                 <h1 className="text-gray-700 font-bold text-2xl my-4">{campanha.nomeCampanha}</h1>
-                <div className="flex gap-2 border border-x-0 border-b-0 py-4 items-center">
+                <Divider />
+
+                <div className="flex gap-2 pb-3 items-center">
                     <Image
                         src='/assets/avatar.png'
                         width={70}
@@ -179,7 +213,12 @@ export default function Campanha({ params: { id } }) {
                                     onClick={handleDecrement}
                                     className="p-2 shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
                                 >-</button>
-                                <input value={valor} className="shadow-sm w-full text-center rounded-md border p-2 outline-none transition-all hover:bg-slate-100/50" type="number" />
+                                <Input
+                                    className="text-center"
+                                    value={qtdBilhetes}
+                                    onChange={(e) => setQtdBilhetes(e.target.value)}
+                                />
+
                                 <button
                                     onClick={handleIncremnt}
                                     className="p-2  shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
@@ -189,42 +228,60 @@ export default function Campanha({ params: { id } }) {
                                 <span>Valor final</span>
                                 <span>R$ 0,24</span>
                             </div>
-                            <button onClick={showModal} className="p-2 shadow-sm rounded-md font-semibold text-white transition-all bg-[#4ADE80] hover:bg-[#4ADE80]/50">RESERVAR</button>
-                            {/* <Button onClick={showModal} className="bg-[#4ADE80]" type="primary">RESERVAR</Button> */}
-                            <Modal title="Reservar bilhetes" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} className="">
-                                <Space direction="vertical" style={{ width: '100%' }}>
-                                    <Input
-                                        addonBefore={<LuAnchor />}
-                                        placeholder="Nome complento"
-                                        allowClear
-                                    />
-                                    <Input
-                                        addonBefore={<LuMail />}
-                                        placeholder="Digite seu email"
-                                        allowClear
-                                        className="w-full"
-                                    />
-                                    <Input
-                                        addonBefore={<LuPhone />}
-                                        placeholder="Telefone / WhatsApp"
-                                        allowClear
-                                    />
-                                    <Input
-                                        addonBefore={<LuPhone />}
-                                        placeholder="Repita o telefone"
-                                        allowClear
-                                    />
-                                </Space>
-                                <div className="flex gap-4 items-start mt-3">
-                                    <div className="py-1">
-                                        <input type="checkbox" name="" id="" />
+                            <Button onClick={showModal} className="bg-[#4ADE80]" type="primary">RESERVAR</Button>
+                            <Modal
+
+                                title="Reservar bilhetes"
+                                open={isModalOpen}
+                                onOk={handleOk}
+                                onCancel={handleCancel}
+                                okText="RESERVAR"
+                                okButtonProps={{
+                                    style: {
+                                        backgroundColor: '#4ADE80',
+                                    },
+                                }}
+                            >
+
+                                <form onChange={handleChange}>
+                                    <Space className="flex gap-3 mt-3" direction="vertical" style={{ width: '100%' }}>
+                                        <Input
+                                            name="nome"
+                                            addonBefore={<LuAnchor />}
+                                            placeholder="Nome complento"
+                                            allowClear
+                                        />
+                                        <Input
+                                            name="email"
+                                            addonBefore={<LuMail />}
+                                            placeholder="Digite seu email"
+                                            allowClear
+                                        />
+                                        <Input
+                                            name="telefone"
+                                            addonBefore={<LuPhone />}
+                                            placeholder="Telefone / WhatsApp"
+                                            allowClear
+                                        />
+                                        <Input
+                                            name="telefoneRepetido"
+                                            addonBefore={<LuPhone />}
+                                            placeholder="Repita o telefone"
+                                            allowClear
+                                        />
+                                    </Space>
+                                    <div className="flex gap-4 items-start mt-3">
+                                        <div className="py-1">
+                                            <input type="checkbox" name="therms" id="therms" />
+                                        </div>
+                                        <span>Li e concordo com os Termos e Condições e estou ciente de que essa reserva me vincula apenas à esta campanha criada pelo(a) organizador(a) e NÃO à plataforma.</span>
                                     </div>
-                                    <span>Li e concordo com os Termos e Condições e estou ciente de que essa reserva me vincula apenas à esta campanha criada pelo(a) organizador(a) e NÃO à plataforma.</span>
-                                </div>
+                                    <input type="submit" value="SUbmit" />
+                                </form>
                             </Modal>
                         </div>
-                    </div>
-                </div>
+                    </div >
+                </div >
 
                 <div className="grid grid-cols-2 gap-2">
                     <div className="p-4 border shadow-sm bg-white rounded-lg">
@@ -236,7 +293,7 @@ export default function Campanha({ params: { id } }) {
                         <p className="flex items-center"><LuClover className="text-[#00D26A]" />Loteria federal</p>
                     </div>
                 </div>
-            </div>
+            </div >
 
         </div >
     )
