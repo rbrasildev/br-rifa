@@ -4,8 +4,9 @@ import Image from "next/image"
 import React, { useState } from "react"
 
 import { LuAnchor, LuClover, LuInstagram, LuMail, LuPhone, LuPhoneCall, LuSearch } from "react-icons/lu"
-import { Button, Modal, Skeleton, SkeletonProps, Space, Input } from 'antd';
-import Search, { SearchProps } from "antd/es/input/Search";
+import { Button, Modal, Space, Input } from 'antd';
+import { setRequestMeta } from "next/dist/server/request-meta";
+
 
 
 interface CampanhaProps {
@@ -21,20 +22,46 @@ interface CampanhaProps {
 
 export default function Campanha({ params: { id } }) {
 
-    const [valor, setValor] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [qtdBilhetes, setQtdBilhetes] = useState(1);
+    const [formData, setFormData] = useState({
+        qtdBilhetesMOdal: '',
+        nome: '',
+        email: '',
+        telefone: '',
+        telefoneRepetido: '',
+    });
+
+    const handleChange = (e: any) => {
+
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const getFormData = () => {
+        return formData;
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleOk = () => {
+    const handleOk = async () => {
+
         setIsModalOpen(false);
+        const data = getFormData();
+        console.log(data)
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
+
+
 
     // async function getData(): Promise<CampanhaProps> {
     //     const response = await fetch(
@@ -47,13 +74,13 @@ export default function Campanha({ params: { id } }) {
     const campanha = [{}];
 
     const handleIncremnt = () => {
-        setValor(valor + 1)
+        setQtdBilhetes(qtdBilhetes + 1)
     }
     const handleDecrement = () => {
-        setValor(valor - 1)
+        setQtdBilhetes(qtdBilhetes - 1)
     }
     const handleSpecificValue = (specificValue: number) => {
-        setValor(valor + specificValue)
+        setQtdBilhetes(qtdBilhetes + specificValue)
     }
 
 
@@ -179,7 +206,12 @@ export default function Campanha({ params: { id } }) {
                                     onClick={handleDecrement}
                                     className="p-2 shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
                                 >-</button>
-                                <input value={valor} className="shadow-sm w-full text-center rounded-md border p-2 outline-none transition-all hover:bg-slate-100/50" type="number" />
+                                <Input
+                                    className="text-center"
+                                    value={qtdBilhetes}
+                                    onChange={(e) => setQtdBilhetes(e.target.value)}
+                                />
+
                                 <button
                                     onClick={handleIncremnt}
                                     className="p-2  shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
@@ -189,32 +221,54 @@ export default function Campanha({ params: { id } }) {
                                 <span>Valor final</span>
                                 <span>R$ 0,24</span>
                             </div>
-                            {/* <button onClick={showModal} className="p-2 shadow-sm rounded-md font-semibold text-white transition-all bg-[#4ADE80] hover:bg-[#4ADE80]/50">RESERVAR</button> */}
                             <Button onClick={showModal} className="bg-[#4ADE80]" type="primary">RESERVAR</Button>
-                            <Modal title="Reservar bilhetes" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} className="">
-                                <Space direction="vertical" style={{ width: '100%' }}>
-                                    <Input
-                                        addonBefore={<LuAnchor />}
-                                        placeholder="Nome complento"
-                                        allowClear
-                                    />
-                                    <Input
-                                        addonBefore={<LuMail />}
-                                        placeholder="Digite seu email"
-                                        allowClear
-                                        className="w-full"
-                                    />
-                                    <Input
-                                        addonBefore={<LuPhone />}
-                                        placeholder="Telefone / WhatsApp"
-                                        allowClear
-                                    />
-                                    <Input
-                                        addonBefore={<LuPhone />}
-                                        placeholder="Repita o telefone"
-                                        allowClear
-                                    />
-                                </Space>
+                            <Modal
+
+                                title="Reservar bilhetes"
+                                open={isModalOpen}
+                                onOk={handleOk}
+                                onCancel={handleCancel}
+                                okText="RESERVAR"
+                                okButtonProps={{
+                                    style: {
+                                        backgroundColor: '#4ADE80',
+                                    },
+                                }}
+                            >
+
+                                <form onChange={handleChange}>
+                                    <Space className="flex gap-3 mt-3" direction="vertical" style={{ width: '100%' }}>
+                                        <Input
+                                            name="qtd-bilhetes-modal"
+                                            value={qtdBilhetes}
+                                            type="hidden"
+                                        />
+                                        <Input
+                                            name="nome"
+                                            addonBefore={<LuAnchor />}
+                                            placeholder="Nome complento"
+                                            allowClear
+                                        />
+                                        <Input
+                                            name="email"
+                                            addonBefore={<LuMail />}
+                                            placeholder="Digite seu email"
+                                            allowClear
+                                        />
+                                        <Input
+                                            name="telefone"
+                                            addonBefore={<LuPhone />}
+                                            placeholder="Telefone / WhatsApp"
+                                            allowClear
+                                        />
+                                        <Input
+                                            name="telefoneRepetido"
+                                            addonBefore={<LuPhone />}
+                                            placeholder="Repita o telefone"
+                                            allowClear
+                                        />
+                                    </Space>
+                                </form>
                                 <div className="flex gap-4 items-start mt-3">
                                     <input type="checkbox" name="" id="" />
                                     <p>Li e concordo com os Termos e Condições e estou ciente de que essa reserva me vincula apenas à esta campanha criada pelo(a) organizador(a) e NÃO à plataforma.</p>
