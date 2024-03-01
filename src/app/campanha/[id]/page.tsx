@@ -1,11 +1,11 @@
-'use client'
 import Image from "next/image"
 
-import React, { useEffect, useState } from "react"
 
-import { LuAnchor, LuClover, LuInstagram, LuMail, LuPhone, LuPhoneCall, LuSearch } from "react-icons/lu"
-import { Button, Modal, Space, Input, Divider } from 'antd';
-import getData from "../api";
+
+import { LuClover, LuInstagram, LuPhoneCall, LuSearch } from "react-icons/lu"
+import { Divider } from 'antd';
+import Bilhetes from "../bilhetes";
+
 
 
 interface CampanhaProps {
@@ -17,77 +17,15 @@ interface CampanhaProps {
     telefone: string,
 }
 
-export default function Campanha({ params: { id } }: { params: { id: string } }) {
-    const [campanha, setCampanha] = useState<CampanhaProps>({
-        id: 0,
-        nomeCampanha: '',
-        qtdBilhete: 0,
-        valor: 0,
-        localSorteio: '',
-        telefone: ''
-    })
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [qtdBilhetes, setQtdBilhetes] = useState(1);
-    const [formData, setFormData] = useState({
-        qtd: '',
-        nome: '',
-        email: '',
-        telefone: '',
-        telefoneRepetido: '',
-    });
+export default async function Campanha({ params: { id } }: { params: { id: number } }) {
 
-    useEffect(() => {
-        setCampanha(await getData(id))
-    }, [])
+    async function getData(id: number) {
+        const response = await fetch(`https://br-rifa-frontend.vercel.app/api/campanha/${id}`);
 
-    const handleChange = (e: any) => {
-        e.preventDefault()
-
-        setFormData({
-            ...formData,
-            ['qtd']: qtdBilhetes.toString(),
-        });
-        const { name, value } = e.target;
-
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const getFormData = () => {
-        return formData;
-    };
-
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-        let newData = getFormData()
-
-        newData.qtd = qtdBilhetes.toString();
-        const data = newData;
-        console.log(data)
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-
-
-    const handleIncremnt = () => {
-        setQtdBilhetes(qtdBilhetes + 1)
-    }
-    const handleDecrement = () => {
-        setQtdBilhetes(qtdBilhetes - 1)
-    }
-    const handleSpecificValue = (specificValue: number) => {
-        setQtdBilhetes(qtdBilhetes + specificValue)
+        return response.json();
     }
 
+    const campanha = await getData(id);
 
     return (
 
@@ -184,8 +122,9 @@ export default function Campanha({ params: { id } }: { params: { id: string } })
                         </div>
                     </div>
                 </div>
+                <Bilhetes />
 
-                <div className="bg-white p-4 rounded-2xl border mb-6 shadow-sm">
+                {/* <div className="bg-white p-4 rounded-2xl border mb-6 shadow-sm">
                     <p className="my-6 font-semibold translate-x-[-25px] text-center">SELECIONE A QUANTIDADE DE BILHETES</p>
                     <div className="text-sm mb-6 flex justify-center">
                         <div className="flex flex-col  gap-2 w-[70%]">
@@ -281,7 +220,7 @@ export default function Campanha({ params: { id } }: { params: { id: string } })
                             </Modal>
                         </div>
                     </div >
-                </div >
+                </div > */}
 
                 <div className="grid grid-cols-2 gap-2">
                     <div className="p-4 border shadow-sm bg-white rounded-lg">
