@@ -1,11 +1,8 @@
 import Image from "next/image"
-
-
-
 import { LuClover, LuInstagram, LuPhoneCall, LuSearch } from "react-icons/lu"
 import { Divider } from 'antd';
-import Bilhetes from "../bilhetes";
-
+import Bilhetes from "../components/FormBilhetes";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 
 interface CampanhaProps {
@@ -15,16 +12,15 @@ interface CampanhaProps {
     valor: number,
     localSorteio: string,
     telefone: string,
+    params: Params
 }
 
-export default async function Campanha({ params: { id } }: { params: { id: number } }) {
+export default async function Campanha({ params: { id } }: CampanhaProps) {
 
     async function getData(id: number) {
         const response = await fetch(`https://br-rifa-frontend.vercel.app/api/campanha/${id}`);
-
         return response.json();
     }
-
     const campanha = await getData(id);
 
     return (
@@ -56,7 +52,7 @@ export default async function Campanha({ params: { id } }: { params: { id: numbe
                     <div className="absolute bottom-0 left-0 m-10 max-md:m-4 rounded-md text-sm bg-slate-50 p-3">Participe por apenas: <span className="font-bold">R$ {campanha.valor}</span>🔥</div>
                 </div>
 
-                <h1 className="text-gray-700 font-bold text-2xl my-4">{campanha.nomeCampanha}</h1>
+                <h1 className="text-gray-700 font-bold text-2xl mt-4">{campanha.nomeCampanha}</h1>
                 <Divider />
 
                 <div className="flex gap-2 pb-3 items-center">
@@ -122,105 +118,8 @@ export default async function Campanha({ params: { id } }: { params: { id: numbe
                         </div>
                     </div>
                 </div>
-                <Bilhetes />
 
-                {/* <div className="bg-white p-4 rounded-2xl border mb-6 shadow-sm">
-                    <p className="my-6 font-semibold translate-x-[-25px] text-center">SELECIONE A QUANTIDADE DE BILHETES</p>
-                    <div className="text-sm mb-6 flex justify-center">
-                        <div className="flex flex-col  gap-2 w-[70%]">
-                            <div className="flex max-sm:gap-1 gap-2 justify-between">
-                                <button
-                                    onClick={() => handleSpecificValue(1)}
-                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
-                                >+1</button>
-                                <button
-                                    onClick={() => handleSpecificValue(5)}
-                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
-                                >+5</button>
-                                <button
-                                    onClick={() => handleSpecificValue(10)}
-                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
-                                >+10</button>
-                                <button
-                                    onClick={() => handleSpecificValue(100)}
-                                    className="p-2 max-sm:px-5 max-md:px-8 max-lg:px-12 px-16 shadow-sm rounded-md border transition-all hover:bg-slate-100/50"
-                                >+100</button>
-
-                            </div>
-                            <div className="flex justify-between gap-1">
-                                <button
-                                    onClick={handleDecrement}
-                                    className="p-2 shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
-                                >-</button>
-                                <Input
-                                    className="text-center"
-                                    value={qtdBilhetes}
-                                    onChange={(e) => setQtdBilhetes(e.target.value)}
-                                />
-
-                                <button
-                                    onClick={handleIncremnt}
-                                    className="p-2  shadow-sm rounded-full border transition-all hover:bg-slate-100/50"
-                                >+</button>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Valor final</span>
-                                <span>R$ 0,24</span>
-                            </div>
-                            <Button onClick={showModal} className="bg-[#4ADE80]" type="primary">RESERVAR</Button>
-                            <Modal
-
-                                title="Reservar bilhetes"
-                                open={isModalOpen}
-                                onOk={handleOk}
-                                onCancel={handleCancel}
-                                okText="RESERVAR"
-                                okButtonProps={{
-                                    style: {
-                                        backgroundColor: '#4ADE80',
-                                    },
-                                }}
-                            >
-
-                                <form onChange={handleChange}>
-                                    <Space className="flex gap-3 mt-3" direction="vertical" style={{ width: '100%' }}>
-                                        <Input
-                                            name="nome"
-                                            addonBefore={<LuAnchor />}
-                                            placeholder="Nome complento"
-                                            allowClear
-                                        />
-                                        <Input
-                                            name="email"
-                                            addonBefore={<LuMail />}
-                                            placeholder="Digite seu email"
-                                            allowClear
-                                        />
-                                        <Input
-                                            name="telefone"
-                                            addonBefore={<LuPhone />}
-                                            placeholder="Telefone / WhatsApp"
-                                            allowClear
-                                        />
-                                        <Input
-                                            name="telefoneRepetido"
-                                            addonBefore={<LuPhone />}
-                                            placeholder="Repita o telefone"
-                                            allowClear
-                                        />
-                                    </Space>
-                                    <div className="flex gap-4 items-start mt-3">
-                                        <div className="py-1">
-                                            <input type="checkbox" name="therms" id="therms" />
-                                        </div>
-                                        <span>Li e concordo com os Termos e Condições e estou ciente de que essa reserva me vincula apenas à esta campanha criada pelo(a) organizador(a) e NÃO à plataforma.</span>
-                                    </div>
-                                    <input type="submit" value="SUbmit" />
-                                </form>
-                            </Modal>
-                        </div>
-                    </div >
-                </div > */}
+                <Bilhetes nomeCampanha={campanha.nomeCampanha} valor={campanha.valor} />
 
                 <div className="grid grid-cols-2 gap-2">
                     <div className="p-4 border shadow-sm bg-white rounded-lg">
