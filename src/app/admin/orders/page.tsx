@@ -38,13 +38,15 @@ export default async function Orders() {
 
   const data = await getData();
 
-  function generateNumber(value) {
-    const numbers = []
+
+  function generateNumber(value: number): number[] {
+    const numbers: number[] = [];
     for (let i = 0; i <= value; i++) {
-      numbers.push(Math.floor(Math.random() * value))
+      numbers.push(Math.floor(Math.random() * value));
     }
     return numbers;
   }
+
 
   return (
     <DashboardLayout>
