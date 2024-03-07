@@ -12,6 +12,8 @@ import { Select } from 'antd';
 
 interface CampanhaProps {
   id: number;
+  nome: string,
+  qtd: number,
   nomeCampanha: string;
   qtdBilhete: number;
   valor: number;
@@ -20,23 +22,34 @@ interface CampanhaProps {
   value: number;
 }
 
-async function getData() {
-  const response = await fetch(
-    'https://br-rifa-frontend.vercel.app/api/campanha'
-  );
-  return response.json();
-}
 
 export default async function Orders() {
 
-  const campanha: CampanhaProps[] = await getData();
-
-  async function getData() {
-    const response = await fetch('https://api-reaffle.vercel.app/compra')
+  async function getData(): Promise<CampanhaProps[]> {
+    const response = await fetch(
+      'https://br-rifa-frontend.vercel.app/api/campanha'
+    );
     return response.json();
   }
 
-  const data = await getData();
+  const campanha = await getData();
+
+
+  async function getCampanha(): Promise<CampanhaProps[]> {
+    try {
+      const response = await fetch('https://api-reaffle.vercel.app/compra');
+      if (!response.ok) {
+        throw new Error('Erro ao buscar dados da API');
+      }
+      const data: CampanhaProps[] = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Erro ao obter os dados:', error);
+      return [];
+    }
+  }
+
+  const data = await getCampanha();
 
 
   function generateNumber(value: number): number[] {
