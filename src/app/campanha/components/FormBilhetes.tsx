@@ -81,7 +81,6 @@ export default function Bilhetes({ valor }: CampanhaProps) {
         } else {
             alert('Erro ao salvar');
         }
-
     }
 
     return (
