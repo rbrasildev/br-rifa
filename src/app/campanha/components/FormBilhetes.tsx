@@ -27,107 +27,15 @@ export default function Bilhetes({ valor }: CampanhaProps) {
     const [qtdBilhetes, setQtdBilhetes] = useState(1);
 
 
-    const [formData, setFormData] = useState({
-        nome: '',
-        email: '',
-        telefone: '',
-        telefoneRepetido: '',
-        qtd: '',
-        agree: ''
-
-    });
-
-    function createCompra({ nome, email, telefone, qtd, agree }: CampanhaProps) {
-        const data = {
-            nome,
-            telefone,
-            email,
-            qtd,
-            agree,
-        };
-
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        };
-
-        fetch("localhost:3333/compra", options)
-            .then((response) => {
-                if (response.ok) {
-                    console.log("Compra realizada com sucesso!");
-                } else {
-                    console.error("Erro na compra:", response.statusText);
-                }
-            })
-            .catch((error) => {
-                console.error("Erro na requisição:", error);
-            });
-    }
-
-    const handleChange = (e) => {
-        e.preventDefault()
-        const { name, value } = e.target;
-
-        setFormData({
-            ...formData,
-            ['qtd']: qtdBilhetes.toString(),
-        });
-
-
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-
-    };
-
-
-    const getFormData = () => {
-        return formData;
-    };
-
     const showModal = () => {
         setIsModalOpen(true);
     };
 
     const handleOk = () => {
         setIsModalOpen(false);
-        let newData = getFormData()
 
-        newData.qtd = qtdBilhetes.toString();
-        // const data = newData;
-
-        const data = {
-            nome: "Seu nome",
-            telefone: "(XX) XXXX-XXXX",
-            email: "seuemail@exemplo.com",
-            qtd: 1,
-            agree: true,
-        };
-
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        };
-
-        fetch("http://localhost:3333/compra", options)
-            .then((response) => {
-                if (response.ok) {
-                    console.log("Compra realizada com sucesso!");
-                } else {
-                    console.error("Erro na compra:", response.statusText);
-                }
-            })
-            .catch((error) => {
-                console.error("Erro na requisição:", error);
-            });
     };
+
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -143,7 +51,38 @@ export default function Bilhetes({ valor }: CampanhaProps) {
         setQtdBilhetes(qtdBilhetes + specificValue)
     }
 
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
 
+        const rawFormData = {
+            nome: formData.get('nome'),
+            email: formData.get('email'),
+            telefone: formData.get('telefone'),
+            telefoneRepetido: formData.get('telefoneRepetido'),
+            qtd: qtdBilhetes,
+            agree: formData.get('agree')
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(rawFormData)
+        };
+
+        const url = 'https://api-reaffle.vercel.app/compra';
+
+        const response = await fetch(url, requestOptions);
+
+        if (response.ok) {
+            console.log(response);
+        } else {
+            alert('Erro ao salvar');
+        }
+
+    }
 
     return (
         <div className="bg-white p-4 rounded-2xl border mb-6 shadow-sm">
@@ -214,7 +153,7 @@ export default function Bilhetes({ valor }: CampanhaProps) {
                             },
                         }}
                     >
-                        <form onChange={handleChange}>
+                        <form onSubmit={handleFormSubmit}>
                             <Space className="flex gap-3 mt-3" direction="vertical" style={{ width: '100%' }}>
                                 <Input
                                     name="nome"
@@ -241,6 +180,7 @@ export default function Bilhetes({ valor }: CampanhaProps) {
                                     allowClear
                                 />
                             </Space>
+                            <input type="submit" value='ENviar' />
                             <div className="flex gap-4 items-start mt-3">
                                 <div className="py-1">
                                     <input type="checkbox" name="agree" id="agree" />

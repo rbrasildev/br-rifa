@@ -1,5 +1,5 @@
 import DashboardLayout from "@/app/components/admin/layout";
-import { LuDelete, LuEye, LuTrash } from "react-icons/lu";
+import { LuEye } from "react-icons/lu";
 
 export default async function videos() {
     async function getData() {

@@ -43,6 +43,7 @@ export default function Create() {
 
     const url = '/api/campanha';
     const response = await fetch(url, requestOptions);
+
     if (response.ok) {
       console.log(response);
     } else {

@@ -1,7 +1,7 @@
 import DashboardLayout from '@/app/components/admin/layout';
 import {
   LuCalendar,
-  LuChevronDown,
+
   LuCircleDollarSign,
   LuEyeOff,
   LuFilter,
@@ -9,8 +9,7 @@ import {
 } from 'react-icons/lu';
 import OrdersDropdown from '@/app/components/orders/ordersDropdown';
 import { Select } from 'antd';
-import { Labrada } from 'next/font/google';
-import { color } from 'framer-motion';
+
 
 interface CampanhaProps {
   id: number;
@@ -19,6 +18,7 @@ interface CampanhaProps {
   valor: number;
   localSorteio: string;
   telefone: string;
+  value: number;
 }
 
 async function getData() {
@@ -29,27 +29,15 @@ async function getData() {
 }
 
 export default async function Orders() {
+
   const campanha: CampanhaProps[] = await getData();
 
   async function getData() {
-    const response = await fetch('http://localhost:3333/compra')
+    const response = await fetch('https://api-reaffle.vercel.app/compra')
     return response.json();
   }
 
   const data = await getData();
-
-  console.log(data)
-
-  // const numbers = [
-  //   3490, 28668, 44407, 36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668,
-  //   44407, 36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668, 44407, 36863,
-  //   87748, 11444, 42944, 74872, 42318, 34585, 28668, 44407, 36863, 87748, 11444,
-  //   42944, 74872, 42318, 34585, 28668, 44407, 36863, 87748, 11444, 42944, 74872,
-  //   42318, 34585, 28668, 44407, 36863, 87748, 11444, 42944, 74872, 42318, 34585,
-  //   28668, 44407, 36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668, 44407,
-  //   36863, 87748, 11444, 42944, 74872, 42318, 34585, 28668, 44407, 36863, 87748,
-  //   11444, 42944, 74872, 42318, 34585
-  // ];
 
   function generateNumber(value) {
     const numbers = []
