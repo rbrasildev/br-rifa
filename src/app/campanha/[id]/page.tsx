@@ -12,10 +12,9 @@ interface CampanhaProps {
     valor: number,
     localSorteio: string,
     telefone: string,
-    params: Params
 }
 
-export default async function Campanha({ params: { id } }: CampanhaProps) {
+export default async function Campanha({ params: { id } }) {
 
     async function getData(id: number) {
         const response = await fetch(`https://br-rifa-frontend.vercel.app/api/campanha/${id}`);
